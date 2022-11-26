@@ -1,0 +1,319 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+/******************************************************************/
+/******************************************************************/
+/* init                                                           */
+/******************************************************************/
+
+* {
+  font-family: "AppleSDGothicNeo", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+
+/******************************************************************/
+/******************************************************************/
+/* Scroll Bar                                                     */
+/******************************************************************/
+
+* > ::-webkit-scrollbar {
+  width: 8px;
+}
+
+* > ::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  box-shadow: inset 0px 0px 5px white;
+}
+* > ::-webkit-scrollbar-track {
+  background-color: rgba(211, 211, 211, 0.016);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px rgba(255, 255, 255, 0.252);
+}
+
+body {
+  margin: 0;
+  background-color: #060511;
+}
+
+/******************************************************************/
+/******************************************************************/
+/* Font                                                           */
+/******************************************************************/
+
+@import url(https://cdn.rawgit.com/kattergil/NotoSerifKR-Web/76eb9ebf/stylesheet/NotoSerif-Web.css);
+
+/* @font-face {
+  font-family: "AppleSDGothicNeo";
+  font-weight: 700;
+  src: url("/fonts/AppleSDGothicNeoEB.ttf") format("truetype");
+} */
+
+h1 {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 40px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+
+h2 {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 34px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+
+h3 {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 30px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+
+h4 {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+
+h5 {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+
+h6 {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+p {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: -0.4px;
+  color: #f4f4f5;
+}
+
+.serif {
+  font-family: "Noto Serif KR", serif;
+}
+
+/******************************************************************/
+/******************************************************************/
+/* Color                                                          */
+/******************************************************************/
+
+.white {
+  color: #e5e5ea;
+}
+
+.white2 {
+  color: #efeff0;
+}
+
+.white3 {
+  color: #f4f4f5;
+}
+
+.white4 {
+  color: #f2f2f7;
+}
+
+.blue {
+  color: #0a84ff;
+}
+.green {
+  color: #30d158;
+}
+
+.purple {
+  color: #5e5ce6;
+}
+
+.orange {
+  color: #ff9f0a;
+}
+
+.pink {
+  color: #ff375f;
+}
+
+.magenta {
+  color: #bf5af2;
+}
+
+.gray {
+  color: #48484a;
+}
+
+.gray2 {
+  color: #8e8e93;
+}
+
+.gray3 {
+  color: #8e8e93;
+}
+
+.yellow {
+  color: #ffe600;
+}
+
+.red {
+  color: #ff453a;
+}
+
+.grayPen {
+  background: linear-gradient(to top, #717171 40%, transparent 40%);
+  background-position-y: 20px;
+}
+
+/******************************************************************/
+/******************************************************************/
+/* Button                                                         */
+/******************************************************************/
+
+.ButtonText {
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 21px;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+button.shake {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+/******************************************************************/
+/******************************************************************/
+/* Input                                                          */
+/******************************************************************/
+
+/* textarea {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: "AppleSDGothicNeo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #e0e0e0;
+  resize: none;
+} */
+.grayInput {
+  border: none;
+
+  background: linear-gradient(to top, #717171 30%, transparent 30%);
+  background-position-y: 25px;
+
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 22px;
+  letter-spacing: -0.5px;
+  color: #e0e0e0;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/******************************************************************/
+/******************************************************************/
+/* Textarea                                                       */
+/******************************************************************/
+
+textarea {
+  resize: none;
+  padding: 8px;
+}
+
+div {
+  -webkit-tap-highlight-color: transparent;
+}

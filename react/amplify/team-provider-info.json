@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-spacechat-dev-165500-authRole",
+      "UnauthRoleArn": "arn:aws:iam::571495652160:role/amplify-spacechat-dev-165500-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::571495652160:role/amplify-spacechat-dev-165500-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-spacechat-dev-165500-deployment",
+      "UnauthRoleName": "amplify-spacechat-dev-165500-unauthRole",
+      "StackName": "amplify-spacechat-dev-165500",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:571495652160:stack/amplify-spacechat-dev-165500/58e7fed0-4615-11ed-ab1b-066e5388ae01",
+      "AmplifyAppId": "d3p8l36f1e5rq"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3p8l36f1e5rq",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "true": {}
+      }
+    }
+  }
+}
