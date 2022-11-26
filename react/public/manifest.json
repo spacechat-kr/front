@@ -1,6 +1,6 @@
 {
-  "short_name": "Space Chat",
-  "name": "Free Chat Service",
+  "name": "Space Chat",
+  "short_name": "스페이스채팅",
   "description": "The web app that provides free chatting service.",
   "lang": "en_US",
   "theme_color": "#fff",
