@@ -4,61 +4,69 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <title>Space Chat</title>
         {/* PWA Icon */}
-        <link rel="manifest" href="/manifest.json" />
-        {/* <meta name="application-name" content="PWA App" />
+        <meta name="application-name" content="Space Chat" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="PWA App" />
-        <meta name="description" content="Best PWA App in the world" />
+        <meta name="description" content="The web app that provides free chatting service." />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-config" content="/icons/browserconfig.xml" />
-        <meta name="msapplication-TileColor" content="#2B5797" />
+        {/* <meta name="msapplication-config" content="/icons/browserconfig.xml" /> */}
+        <meta name="msapplication-TileColor" content="#fff" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#ffffff" />
 
-        <link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/icons/touch-icon-ipad.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/icons/touch-icon-iphone-retina.png" />
-        <link rel="apple-touch-icon" sizes="167x167" href="/icons/touch-icon-ipad-retina.png" />
+        <link rel="apple-touch-icon" href="/favicon/ios/50.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon/ios/152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/ios/180.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/favicon/ios/167.png" />
 
-        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon/windows11/Square44x44Logo.altform-lightunplated_targetsize-32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon/windows11/Square44x44Logo.altform-lightunplated_targetsize-16.png"
+        />
+        {/* <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#ffffff" /> */}
+        <link rel="shortcut icon" href="/favicon/ios/152.png" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
 
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:url" content="https://yourdomain.com" />
-        <meta name="twitter:title" content="PWA App" />
-        <meta name="twitter:description" content="Best PWA App in the world" />
-        <meta name="twitter:image" content="https://yourdomain.com/icons/android-chrome-192x192.png" />
-        <meta name="twitter:creator" content="@DavidWShadow" />
+        <meta name="twitter:url" content="http://spacechat.kr/" />
+        <meta name="twitter:title" content="Space Chat" />
+        <meta name="twitter:description" content="The web app that provides free chatting service." />
+        <meta name="twitter:image" content="http://spacechat.kr/android/android-launchericon-192-192.png" />
+        {/* <meta name="twitter:creator" content="@DavidWShadow" /> */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="PWA App" />
-        <meta property="og:description" content="Best PWA App in the world" />
-        <meta property="og:site_name" content="PWA App" />
-        <meta property="og:url" content="https://yourdomain.com" />
-        <meta property="og:image" content="https://yourdomain.com/icons/apple-touch-icon.png" /> */}
+        <meta property="og:title" content="Space Chat" />
+        <meta property="og:description" content="The web app that provides free chatting service." />
+        <meta property="og:site_name" content="Space Chat" />
+        <meta property="og:url" content="http://spacechat.kr/" />
+        <meta property="og:image" content="http://spacechat.kr/favicon/ios/167.png" />
         {/* favicon */}
-        {/* <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png" />
-        <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png" />
-        <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" /> */}
-        {/* <meta name="msapplication-TileColor" content="#ffffff" /> */}
-        {/* <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png" /> */}
-        {/* <meta name="theme-color" content="#ffffff" /> */}
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicon/ios/57.png" />
+        <link rel="apple-touch-icon" sizes="60x60" href="/favicon/ios/60.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/favicon/ios/72.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="/favicon/ios/76.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/favicon/ios/114.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/favicon/ios/120.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/favicon/ios/144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon/ios/152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/ios/180.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="favicon/android/android-launchericon-192-192.png" />
+        <link rel="icon" type="image/png" sizes="48x48" href="favicon/android/android-launchericon-48-48.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="favicon/android/android-launchericon-96-96.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="favicon/android/android-launchericon-512-512.png" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="/favicon/windows11/LargeTile.scale-200.png" />
         {/* IOS 스플래시 메타태그 */}
         <link
           rel="apple-touch-startup-image"
@@ -220,6 +228,7 @@ export default function Document() {
           media="screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
           href="images/splash_screens/4__iPhone_SE__iPod_touch_5th_generation_and_later_portrait.png"
         />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
       <body>
         <Main />
