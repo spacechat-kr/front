@@ -9,7 +9,7 @@ import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
 import { Settings } from "@mui/icons-material";
 import Map from "../components/Map";
 
-export default () => {
+export default function Page() {
   // const router = useRouter();
 
   // useEffect(() => {
@@ -31,7 +31,7 @@ export default () => {
       </Container>
     </>
   );
-};
+}
 
 const HomeHeightState = atom<number>({ key: "HomeHeightState", default: 1000 });
 const HomeHeader = () => {
