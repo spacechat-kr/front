@@ -25,9 +25,9 @@ export default function Page() {
       <button onClick={() => router.push("#option")}>option</button>
       <button onClick={() => router.push("#roomList")}>roomList</button> */}
         <HomeHeader />
-        <div style={{ background: "black", height: "100vh" }}>
-          <Map />
-        </div>
+        {/* <div style={{height: "100vh" }}> */}
+        <Map />
+        {/* </div> */}
       </Container>
     </>
   );
@@ -55,7 +55,7 @@ const HomeHeader = () => {
         width: "100%",
         maxWidth: 900,
         overflow: "hidden",
-        top: isOpen ? -height : -600,
+        top: isOpen ? -height : -height - 150,
         transition: "opacity 0.3s, top 0.2s",
         opacity: height === 1000 ? 0 : 1,
       }}
@@ -71,7 +71,7 @@ const HomeHeader = () => {
           <Settings style={{ fontSize: 33, color: "#CEC2FF" }} />
         </ButtonBase>
       </div>
-      {(height > 0 || !isOpen) && (
+      {height > 0 && (
         <div
           style={{
             position: "fixed",
