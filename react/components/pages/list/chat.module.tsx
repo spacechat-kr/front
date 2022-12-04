@@ -14,7 +14,8 @@ export const ChatCard = ({
   badge?: number;
   name?: string;
   profile?: string;
-}) => {
+  }) => {
+  const router = useRouter();
   return (
     <ButtonBase
       style={{
@@ -23,6 +24,7 @@ export const ChatCard = ({
         width: "100%",
         background: "white",
       }}
+      onClick={()=>router.push('/chat/2')}
     >
       <div
         style={{

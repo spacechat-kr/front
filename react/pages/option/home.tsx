@@ -1,11 +1,10 @@
-import Container from "@mui/material/Container";
+import { ArrowBackIosNewRounded, ArrowForwardIosRounded } from "@mui/icons-material";
 import { ButtonBase } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
-import { atom, useRecoilState } from "recoil";
-import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
-import { ArrowBackIosNewRounded, ArrowCircleLeftRounded, ArrowForwardIosRounded, Settings } from "@mui/icons-material";
-import { useRouter } from "next/router";
+import Container from "@mui/material/Container";
 import { Box } from "@mui/system";
+import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
+import { atom, useRecoilState } from "recoil";
 
 export default function Page() {
   return (
