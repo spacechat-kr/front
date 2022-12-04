@@ -60,17 +60,32 @@ const HomeHeader = () => {
         opacity: height === 1000 ? 0 : 1,
       }}
     >
+      <div
+        style={{
+          // height: 100,
+          // background: "orange",
+          zIndex: 10,
+          width: "100%",
+          maxWidth: 900,
+          position: "fixed",
+          top: 0,
+          display: 'flex',
+          justifyContent:'space-between'
+        }}
+      >
+        <div>
+          <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }}>
+            <SmsRoundedIcon style={{ fontSize: 33, transform: "scaleX(-1)", color: "#CEC2FF" }} />
+          </ButtonBase>
+        </div>
+        <div>
+          <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }}>
+            <Settings style={{ fontSize: 33, color: "#CEC2FF" }} />
+          </ButtonBase>
+        </div>
+      </div>
       <img src="/images/header_background.svg" width="100%" />
-      <div style={{ position: "fixed", top: 0, left: 8 }}>
-        <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }}>
-          <SmsRoundedIcon style={{ fontSize: 33, transform: "scaleX(-1)", color: "#CEC2FF" }} />
-        </ButtonBase>
-      </div>
-      <div style={{ position: "fixed", top: 0, right: 8 }}>
-        <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }}>
-          <Settings style={{ fontSize: 33, color: "#CEC2FF" }} />
-        </ButtonBase>
-      </div>
+
       {height > 0 && (
         <div
           style={{
