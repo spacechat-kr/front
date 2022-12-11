@@ -1,153 +1,105 @@
+import { Button } from "@mui/material";
 import Container from "@mui/material/Container";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { ChatHeader } from "../../components/pages/chat/ChatHeader";
 import { ChatList } from "../../components/pages/chat/ChatList";
+import { ChatModal } from "../../components/pages/chat/ChatModal";
 import { FileInputBox, InputBox } from "../../components/pages/chat/Input";
-import { useState, useEffect } from "react";
-import { Box } from "@mui/system";
-import { ButtonBase } from "@mui/material";
 
 export default function Page() {
   return (
     <>
       <Container maxWidth="md" style={{ padding: 0, background: "#1A1D2C" }}>
+        <ChatHeader />
         <div style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
-          <ChatHeader />
           <ChatList />
           <FileInputBox />
           <InputBox />
-          <Modal />
+          <ChatModal />
         </div>
+        <SocketListner />
       </Container>
     </>
   );
 }
 
-const ModalList = {
-  alram: {
-    imgSrc: "/icons/modalAlert.svg",
-    cancelText: "알림 끄기",
-    content: () => (
-      <>
-        알람을 끄면
-        <br />
-        채팅이 와도 울리지 않아요.
-        <br />
-        <span>정말 알림을 끌까요?</span>
-      </>
-    ),
-  },
-  out: {
-    imgSrc: "/icons/modalAlert.svg",
-    cancelText: "채팅방 나가기",
-    content: () => (
-      <>
-        채팅방을 나가면
-        <br />
-        기록이 모두 사라져요.
-        <br />
-        <span>정말 채팅방을 나갈까요?</span>
-      </>
-    ),
-  },
-  report: {
-    imgSrc: "/icons/modalMail.svg",
-    cancelText: "메일로 상대방 신고하기",
-    content: () => (
-      <>
-        상대방이 불쾌한 행동을 하나요?
-        <br />
-        메일로 신고내용을 보내주세요.
-      </>
-    ),
-  },
-  none: {
-    cancelText: "",
-    content: () => <div></div>,
-  },
-};
-let remainType = "none";
-const Modal = () => {
-  const router = useRouter();
-  const [type, setType] = useState<"alram" | "out" | "report" | "none">("none");
+let ws: any = null;
+/**
+ * https://jcon.tistory.com/186
+ * @connect socket.connect(): 소켓 연결.
+ * @emit socket.emit("이벤트 명", Data): 이벤트 명을 지정하고 데이터를 보냄.
+ * @on socket.on("이벤트 명", 콜백 함수): 해당 이벤트를 받고 콜백함수를 실행.
+ * @disconnet socket.disconnect(): 소켓 연결을 끊음.
+ */
+const SocketListner = () => {
+  const [socketConnected, setSocketConnected] = useState(false);
+  const [sendMsg, setSendMsg] = useState(false);
+  const [items, setItems] = useState<any>([]);
 
+  const webSocketUrl = `ws://3.113.100.47:8080/ws/chat`;
+
+  // 소켓 객체 생성
   useEffect(() => {
-    if (!router.asPath.includes("#") && ["alram", "out", "report", "none"].includes(type)) remainType = type;
-    const aftertype = router.asPath.split("#")[1] as any;
-    setType(aftertype ? aftertype : "none");
-  }, [router]);
+    if (!ws) {
+      ws = new WebSocket(webSocketUrl);
+      console.log("open");
+      ws.onopen = () => {
+        console.log("connected to " + webSocketUrl);
+        setSocketConnected(true);
+      };
+      ws.onclose = (error) => {
+        console.log("disconnect from " + webSocketUrl);
+        console.log(error);
+      };
+      ws.onerror = (error) => {
+        console.log("connection error " + webSocketUrl);
+        console.log(error);
+      };
+      ws.onmessage = (evt) => {
+        // const data = JSON.parse(evt.data);
+        console.log(evt);
+        // setItems((prevItems) => [...prevItems, data]);
+      };
+    }
 
+    return () => {
+      console.log("clean up");
+      ws.close();
+    };
+  }, []);
+
+  // 소켓이 연결되었을 시에 send 메소드
+  // useEffect(() => {
+  //   if (socketConnected) {
+  //     ws.send(
+  //       JSON.stringify({
+  //         roomId: "1",
+  //         message: "1",
+  //       })
+  //     );
+
+  //     setSendMsg(true);
+  //   }
+  // }, [socketConnected]);
   return (
-    <>
-      <div
-        style={{
-          background: "rgba(0,0,0,0.5)",
-          width: "100vw",
-          height: "100vh",
-          position: "fixed",
-          opacity: type !== "none" ? 1 : 0,
-          visibility: type !== "none" ? "visible" : "hidden",
-          transition: "visibility 0.2s ease-out, opacity 0.2s ease-out",
-          zIndex: 1301,
-        }}
-        onClick={() => router.back()}
-      ></div>
-      <Box
-        sx={{
-          position: "fixed",
-          fontFamily: "AppleSDGothicNeo",
-          fontWeight: 500,
-          fontSize: 20,
-          lineHeight: "29px",
-          textAlign: "center",
-          letterSpacing: "-0.4px",
-          color: "black",
-          background: "white",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          minWidth: 300,
-          zIndex: 1302,
-          padding: "20px 28px 8px 28px",
-          span: {
-            color: "#E65555",
-            fontWeight: 700,
-          },
-          borderRadius: "10px",
-          opacity: type !== "none" ? 1 : 0,
-          visibility: type !== "none" ? "visible" : "hidden",
-          transition: "visibility 0.2s ease-out, opacity 0.2s ease-out",
-          display: "flex",
-          flexDirection: "column",
-          button: {
-            borderRadius: "20px",
-            padding: 1,
-          },
-          "#confirm": {
-            background: "linear-gradient(90deg, #EB2929 4.55%, #E65656 90.68%)",
-            marginTop: 2,
-            color: "white",
-          },
-          "#cancel": {
-            marginTop: 1,
-          },
+    <div style={{ position: "fixed", top: 0, left: 0 }}>
+      <Button
+        onClick={() => {
+          ws.send(
+            JSON.stringify({
+              roomId: "20",
+              message: "af",
+            })
+          );
         }}
       >
-        <div style={{ height: 45, position: "relative", top: -85 }}>
-          <img
-            src={ModalList[type != "none" ? type : remainType].imgSrc}
-            width="130px"
-            style={{ background: "white", border: "10px solid white", borderRadius: 100 }}
-          />
-        </div>
-        {ModalList[type != "none" ? type : remainType].content()}
-        <ButtonBase id="confirm" onClick={() => router.back()}>
-          {ModalList[type != "none" ? type : remainType].cancelText}
-        </ButtonBase>
-        <ButtonBase id="cancel" onClick={() => router.back()}>
-          취소
-        </ButtonBase>
-      </Box>
-    </>
+        보내기
+      </Button>
+    </div>
   );
 };
+
+// // {
+// // "roomId":"1",
+// // "message":"1-1: hello44"
+// // }

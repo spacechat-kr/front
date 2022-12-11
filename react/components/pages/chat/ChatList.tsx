@@ -14,10 +14,11 @@ export const ChatList = () => {
   const [chatList, setChatList] = useRecoilState(ChatListState);
 
   return (
-    <div style={{ overflowY: "scroll", flex: 1 }} id="chatList">
+    <div style={{ overflowY: "scroll", flex: 1, marginTop: "60px" }} id="chatList">
       <Box
         sx={{
-          minHeight: "calc(100vh - 112px)",
+          minHeight: "calc(100vh - 52px)",
+
           ".notice": {
             pr: "20px",
             pl: "20px",

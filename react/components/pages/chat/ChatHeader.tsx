@@ -15,7 +15,7 @@ export const ChatHeader = () => {
     router.asPath.includes("#alram") || router.asPath.includes("#report") || router.asPath.includes("#out");
 
   return (
-    <div style={{ height: 60 }}>
+    <div style={{ height: 60, position: "fixed", width: "100vw", maxWidth: 900 }}>
       <div
         style={{
           background: "#1A1D2C",
@@ -61,6 +61,14 @@ export const ChatHeader = () => {
         <Menu
           anchorEl={anchorEl}
           open={open}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
           onClose={onClose}
           sx={{
             "span, li": {

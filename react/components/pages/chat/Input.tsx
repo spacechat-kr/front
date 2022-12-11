@@ -18,7 +18,7 @@ export const FileInputBox = () => {
         overflow: "visible",
         color: "#E7FFFF",
         top: -80,
-        left: 40,
+        left: "4vw",
       }}
     >
       <Box
@@ -26,11 +26,11 @@ export const FileInputBox = () => {
           width: "max-content",
           display: "flex",
           flexDirection: "row",
+          maxWidth: "96vw",
           button: {
             display: "flex",
             flexDirection: "column",
             borderRadius: 100,
-            mr: "12px",
             opacity: isFileInput ? 1 : 0,
             top: isFileInput ? 0 : 24,
             visibility: isFileInput ? "visible" : "hidden",
@@ -40,27 +40,27 @@ export const FileInputBox = () => {
             fontFamily: "AppleSDGothicNeo",
             position: "relative",
             mt: -2,
-            fontSize: 17,
+            fontSize: "min(4vw, 15px)",
             fontWeight: 500,
             letterSpacing: "-0.4px",
             textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
           },
         }}
       >
-        <ButtonBase onClick={onClick}>
-          <img src="/icons/chatGallery.svg" />
+        <ButtonBase onClick={onClick} style={{ flex: 1, marginRight: "3vw" }}>
+          <img src="/icons/chatGallery.svg" width="100%" />
           <div className="txt">사진첩</div>
         </ButtonBase>
-        <ButtonBase onClick={onClick} style={{ transitionDelay: "0.05s" }}>
-          <img src="/icons/chatCamera.svg" />
+        <ButtonBase onClick={onClick} style={{ flex: 1, marginRight: "3vw", transitionDelay: "0.05s" }}>
+          <img src="/icons/chatCamera.svg" width="100%" />
           <div className="txt">카메라</div>
         </ButtonBase>
-        <ButtonBase onClick={onClick} style={{ transitionDelay: "0.1s" }}>
-          <img src="/icons/chatVideo.svg" />
+        <ButtonBase onClick={onClick} style={{ flex: 1, marginRight: "3vw", transitionDelay: "0.1s" }}>
+          <img src="/icons/chatVideo.svg" width="100%" />
           <div className="txt">동영상</div>
         </ButtonBase>
-        <ButtonBase onClick={onClick} style={{ transitionDelay: "0.15s" }}>
-          <img src="/icons/chatMoon.svg" />
+        <ButtonBase onClick={onClick} style={{ flex: 1, marginRight: "3vw", transitionDelay: "0.15s" }}>
+          <img src="/icons/chatMoon.svg" width="100%" />
           <div className="txt">파일첨부</div>
         </ButtonBase>
       </Box>
