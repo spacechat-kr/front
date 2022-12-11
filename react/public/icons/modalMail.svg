@@ -1,0 +1,18 @@
+<svg width="130" height="130" viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="65" cy="65" r="65" fill="#FFDD73"/>
+<path d="M19 60C19 53.3726 24.3726 48 31 48H100C106.627 48 112 53.3726 112 60V100C112 106.075 107.075 111 101 111H30C23.9249 111 19 106.075 19 100V60Z" fill="#FFF1BD"/>
+<path d="M65.5 8L109.234 52.25H21.7657L65.5 8Z" fill="#BFBFBF"/>
+<path d="M65.5 96.5L21.7657 52.25L109.234 52.25L65.5 96.5Z" fill="#B8B8B8"/>
+<mask id="mask0_1566_1469" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="21" y="0" width="89" height="97">
+<path d="M65.5001 96.5L21.7658 52.25L65.5001 0.5L109.234 52.25L65.5001 96.5Z" fill="#B8B8B8"/>
+</mask>
+<g mask="url(#mask0_1566_1469)">
+<rect x="38" y="31" width="54" height="62" rx="6" fill="white"/>
+<path d="M45 39.5H87" stroke="#BEBEBE" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 47H87" stroke="#BEBEBE" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 54H87" stroke="#BEBEBE" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 61H87" stroke="#BEBEBE" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 68H87" stroke="#BEBEBE" stroke-width="3" stroke-linecap="round"/>
+<path d="M45 75H62" stroke="#BEBEBE" stroke-width="3" stroke-linecap="round"/>
+</g>
+</svg>

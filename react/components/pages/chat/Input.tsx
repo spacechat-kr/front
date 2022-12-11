@@ -140,8 +140,8 @@ export const InputBox = () => {
         }}
       />
       <ButtonBase
-        style={{ padding: 12, background: value.length > 0 ? "#3f58ff" : "#565656", marginLeft: 4 }}
-        disabled={value.length === 0}
+        style={{ padding: 12, background: value.trim().length > 0 ? "#3f58ff" : "#565656", marginLeft: 4 }}
+        disabled={value.trim().length === 0}
         onClick={onClickSend}
       >
         <img src="/icons/send.svg" width="30px" />

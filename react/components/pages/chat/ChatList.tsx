@@ -59,6 +59,7 @@ export const ChatList = () => {
             padding: "4px 10px",
             maxWidth: "80vw",
             overflowWrap: "break-word",
+            whiteSpace: "break-spaces",
           },
           ".my .message": {
             color: "#0A6061",
