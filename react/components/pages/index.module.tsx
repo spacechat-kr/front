@@ -1,17 +1,21 @@
 import { ButtonBase } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
 import { Settings } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
 const HomeHeightState = atom<number>({ key: "HomeHeightState", default: 1000 });
+const IsHomeHeaderState = atom<boolean>({ key: "IsHomeHeaderState", default: false });
+export const IsHideHomeHeaderState = atom<boolean>({ key: "IsHideHomeHeaderState", default: false });
+
 export const HomeHeader = () => {
-	const router = useRouter();
+  const router = useRouter();
   const [height, setHeight] = useRecoilState(HomeHeightState);
-  const [isOpen, setIsOpen] = useState(false);
-	const headerRef = useRef<HTMLDivElement>(null);
-	
+  const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
+  const isHide = useRecoilValue(IsHideHomeHeaderState);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleResize = () => {
       if (headerRef.current) setHeight(Math.max(headerRef.current.clientHeight - 305.88, 0));
@@ -19,10 +23,10 @@ export const HomeHeader = () => {
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
-	}, []);
-	
-	const onClickChat = () => router.push('/list/chat')
-	const onClickSetting = () => router.push('/option/home');
+  }, []);
+
+  const onClickChat = () => router.push("/list/chat");
+  const onClickSetting = () => router.push("/option/home");
 
   return (
     <header
@@ -33,22 +37,22 @@ export const HomeHeader = () => {
         width: "100%",
         maxWidth: 900,
         overflow: "hidden",
-        top: isOpen ? -height : -height - 150,
+        top: isOpen ? -height : -height - 200,
         transition: "opacity 0.3s, top 0.2s",
-        opacity: height === 1000 ? 0 : 1,
+        opacity: height === 1000 || isHide ? 0 : 1,
       }}
     >
       <div
         style={{
-          // height: 100,
-          // background: "orange",
-          zIndex: 10,
           width: "100%",
           maxWidth: 900,
           position: "fixed",
           top: 0,
           display: "flex",
           justifyContent: "space-between",
+          opacity: isOpen ? 1 : 0,
+          visibility: isOpen ? "visible" : "hidden",
+          transition: "visibility 0.2s, opacity 0.2s",
         }}
       >
         <div>
@@ -68,7 +72,7 @@ export const HomeHeader = () => {
         <div
           style={{
             position: "fixed",
-            top: !isOpen ? 100 : 268,
+            top: !isOpen ? 70 : 268,
             left: "calc(50% - 18.5px)",
             transform: isOpen ? undefined : "scaleY(-1)",
             transition: "top 0.2s",

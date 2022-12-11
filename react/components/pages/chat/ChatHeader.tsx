@@ -51,7 +51,7 @@ export const ChatHeader = () => {
             padding: 1,
             opacity: isModal ? 0.7 : 1,
             rotate: isModal ? "22.5deg" : 0,
-            transition: "opacity 0.2s ease-in, rotate 0.2s ease-in",
+            transition: "opacity ease-in 0.2s, rotate ease-in 0.2s",
           }}
           onClick={onClick}
           disabled={isModal}

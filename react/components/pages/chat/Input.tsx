@@ -34,7 +34,7 @@ export const FileInputBox = () => {
             opacity: isFileInput ? 1 : 0,
             top: isFileInput ? 0 : 24,
             visibility: isFileInput ? "visible" : "hidden",
-            transition: "visibility 0.2s, top 0.2s ease-out, opacity 0.1s ease-out",
+            transition: "visibility 0.2s, top ease-out 0.2s, opacity ease-out 0.1s",
           },
           ".txt": {
             fontFamily: "AppleSDGothicNeo",
