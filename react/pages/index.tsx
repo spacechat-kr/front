@@ -68,7 +68,7 @@ const ModalList = {
             },
           }}
         >
-          <FormControl variant="standard" sx={{ m: 1, mt: 3 }}>
+          <FormControl variant="standard" sx={{ m: "8px 8px 0 8px", mt: 2 }}>
             <Input
               inputRef={titleRef}
               onFocus={(ref) => ref.target.setAttribute("maxLength", "13")}
@@ -86,11 +86,11 @@ const ModalList = {
               maxRows={1}
             />
             <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>머릿말*</div>
+              <div> </div>
               <div id="titleLength">0/14</div>
             </FormHelperText>
           </FormControl>
-          <FormControl variant="standard" sx={{ m: 1 }}>
+          <FormControl variant="standard" sx={{ m: "0 8px" }}>
             <textarea
               style={InputDescStyle}
               ref={descRef}
@@ -105,7 +105,7 @@ const ModalList = {
               }}
             />
             <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
-              <div>내용</div>
+              <div> </div>
               <div id="descLength">0/200</div>
             </FormHelperText>
           </FormControl>
