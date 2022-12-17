@@ -229,6 +229,70 @@ export default function Document() {
           href="images/splash_screens/4__iPhone_SE__iPod_touch_5th_generation_and_later_portrait.png"
         />
         <link rel="manifest" href="/manifest.json" />
+        {/* 폰트 프리로드 */}
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoH.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoEB.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoB.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoSB.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoM.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoR.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoL.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoUL.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="styles/font/woff2/AppleSDGothicNeoT.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Head>
       <body>
         <Main />

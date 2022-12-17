@@ -6,6 +6,12 @@ const withPWA = require("next-pwa")({
   runtimeCaching,
   buildExcludes: [/middleware-manifest.json$/],
   disable: process.env.NODE_ENV === "development",
+  rules: [
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: "public/resource",
+    },
+  ],
 });
 
 const nextConfig = withPWA({
