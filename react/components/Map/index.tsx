@@ -30,7 +30,6 @@ export default function Map() {
   useEffect(() => {
     if (mapsRef.current)
       if (isWrite) {
-        console.log(mapsRef.current.Circle);
         writeArea = new mapsRef.current.Circle({
           strokeColor: "#616779",
           strokeWeight: 2,

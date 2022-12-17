@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { Box, ButtonBase } from "@mui/material";
+import { Box, ButtonBase, FormControl, FormHelperText, Input, InputAdornment, TextareaAutosize } from "@mui/material";
 import Container from "@mui/material/Container";
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
-import Map from "../components/Map";
 import { useRouter } from "next/router";
-import { HomeHeader, IsHideHomeHeaderState } from "../components/pages/index/HomeHeader";
+import { useEffect, useState, useRef } from "react";
+import Map from "../components/Map";
+import { HomeHeader } from "../components/pages/index/HomeHeader";
 import { MapNavigation } from "../components/pages/index/MapNavigation";
 
 export default function Page() {
@@ -22,20 +21,97 @@ export default function Page() {
   );
 }
 
+const InputTitleStyle = {
+  fontFamily: "AppleSDGothicNeo",
+  fontWeight: 400,
+  fontSize: 20,
+  lineHeight: "41px",
+  letterSpacing: "-0.4px",
+  border: "none",
+  padding: "0",
+  outline: "none",
+};
+const InputDescStyle = {
+  fontFamily: "AppleSDGothicNeo",
+  fontWeight: 400,
+  fontSize: 15,
+  lineHeight: "22px",
+  letterSpacing: "-0.4px",
+  border: "none",
+  paddingLeft: 10,
+  paddingRight: 10,
+  borderRadius: 2,
+  height: "2.5em",
+};
 const ModalList = {
   write: {
     imgSrc: "/icons/modalWrite.png",
     confirmText: "여기에 쪽지 놓기",
     cancelText: "다른 곳에 쪽지 놓기",
-    content: () => (
-      <>
-        채팅방뫄뫄
-        <br />
-        제발들어와주세요... <br />
-        제발들어와주세요... <br />
-        제발들어와주세요...
-      </>
-    ),
+    content: (titleRef, descRef) => {
+      return (
+        <Box
+          sx={{
+            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.25)",
+            borderRadius: "19px",
+            padding: "8px 16px",
+            overflow: "hidden",
+            "input::placeholder": {
+              fontSize: 16.4,
+            },
+            width: 300,
+            display: "flex",
+            flexDirection: "column",
+            "textarea:focus": {
+              // outline: "none",
+              outline: "#00000039 0.5px solid !important",
+            },
+          }}
+        >
+          <FormControl variant="standard" sx={{ m: 1, mt: 3 }}>
+            <Input
+              inputRef={titleRef}
+              onFocus={(ref) => ref.target.setAttribute("maxLength", "13")}
+              onChange={(r) => {
+                const len = document.getElementById("titleLength");
+                if (len) {
+                  len.innerText = `${r.target.value.length}/13`;
+                  if (r.target.value.length === 0 || r.target.value.length > 13) len.style.color = "red";
+                  else len.style.color = "#00000099";
+                }
+              }}
+              style={InputTitleStyle}
+              id="standard-adornment-weight"
+              placeholder="머릿말을 입력해주세요"
+              maxRows={1}
+            />
+            <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
+              <div>머릿말*</div>
+              <div id="titleLength">0/14</div>
+            </FormHelperText>
+          </FormControl>
+          <FormControl variant="standard" sx={{ m: 1 }}>
+            <textarea
+              style={InputDescStyle}
+              ref={descRef}
+              maxLength={200}
+              onChange={(r) => {
+                const len = document.getElementById("descLength");
+                if (len) {
+                  len.innerText = `${r.target.value.length}/200`;
+                  if (r.target.value.length > 200) len.style.color = "red";
+                  else len.style.color = "#00000099";
+                }
+              }}
+            />
+            <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
+              <div>내용</div>
+              <div id="descLength">0/200</div>
+            </FormHelperText>
+          </FormControl>
+        </Box>
+      );
+    },
   },
   enter: {
     imgSrc: "/icons/modalWrite.png",
@@ -71,6 +147,8 @@ let remainType = "none";
 export const WriteModal = () => {
   const router = useRouter();
   const [type, setType] = useState<"write" | "none">("none");
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (!router.asPath.includes("#") && ["write", "none"].includes(type)) remainType = type;
@@ -93,7 +171,7 @@ export const WriteModal = () => {
           // transition: "visibility ease-in 0.1s, opacity ease-in 0.1s",
           zIndex: 1301,
         }}
-        onClick={() => router.back()}
+        // onClick={() => router.back()}
       ></div>
       <Box
         sx={{
@@ -152,8 +230,15 @@ export const WriteModal = () => {
             style={{ background: "white", border: "10px solid white", borderRadius: 100 }}
           />
         </div>
-        {ModalList[modalTyle].content()}
-        <ButtonBase id="confirm" onClick={() => router.back()}>
+        {ModalList[modalTyle].content(titleRef, descRef)}
+        <ButtonBase
+          id="confirm"
+          onClick={() => {
+            router.back();
+            if (titleRef.current) titleRef.current.value = " ";
+            if (descRef.current) descRef.current.value = " ";
+          }}
+        >
           {ModalList[modalTyle].confirmText}
         </ButtonBase>
         <ButtonBase id="cancel" onClick={() => router.back()}>
