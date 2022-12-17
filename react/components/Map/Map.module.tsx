@@ -3,8 +3,6 @@ import { SxProps } from "@mui/material";
 import GoogleMapReact from "google-map-react";
 import { mapStyle, mapStyleCustom, mapStyleGray } from "../../constant/mapStyle";
 
-let circle;
-
 export const options: (a: boolean, b: boolean) => GoogleMapReact.MapOptions = (
   isFullScreen: boolean,
   isFreezeSlide: boolean
@@ -16,7 +14,7 @@ export const options: (a: boolean, b: boolean) => GoogleMapReact.MapOptions = (
     mapTypeControl: isFreezeSlide,
     scrollwheel: isFreezeSlide,
     zoomControl: isFreezeSlide,
-    noClear:true,
+    noClear: true,
     clickableIcons: false,
     fullscreenControl: isFreezeSlide,
     disableDoubleClickZoom: true,
@@ -80,46 +78,3 @@ export const MapStyle: (p?: StyleProps) => SxProps<Theme> = (
 
 export type PositionType = { lat: number | undefined; lon: number | undefined; zoom: number };
 export const PositionInit = { lat: 37, lon: 127, zoom: 16 };
-
-export const onGoogleApiLoaded = ({ map, maps, position }: { map: any; maps: any; position: PositionType }) => {
-  if (!position.lon || !position.lat || !maps || !maps.Circle) return;
-  circle = new maps.Circle({
-    strokeColor: "#ff000084",
-    strokeOpacity: 0.5,
-    strokeWeight: 1.8,
-    fillColor: "#ff00001e",
-    fillOpacity: 0.16,
-    map,
-    center: { lat: position.lat, lon: position.lon },
-    radius: 1000, //m 기준, 1000이면 1km
-  });
-  circle = new maps.Circle({
-    strokeColor: "#0800ff77",
-    strokeOpacity: 0.5,
-    strokeWeight: 2,
-    fillColor: "#0800ff14",
-    fillOpacity: 0.2,
-    map,
-    center: { lat: position.lat + 0.001, lon: position.lon + 0.001 },
-    radius: 3000, //m 기준, 1000이면 1km
-  });
-  // circle = new maps.Marker({
-  //   position: { lat: position.lat + 0.001, lon: position.lon + 0.001 },
-  //   icon: "/icons/map/blueSvg.svg",
-  //   map: map,
-  // });
-
-  // circle = new maps.Rectangle({
-  //   strokeColor: "#FF0000",
-  //   strokeOpacity: 0.8,
-  //   strokeWeight: 2,
-  //   fillColor: "#FF0000",
-  //   fillOpacity: 0.35,
-  //   borderRadius: 100,
-  //   map: map,
-  //   bounds: new maps.LatLngBounds(
-  //     new maps.LatLng(position.lat, position.lon),
-  //     new maps.LatLng(position.lat + 0.001, position.lon + 0.001)
-  //   ),
-  // });
-};

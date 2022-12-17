@@ -62,6 +62,7 @@ export const ChatModal = () => {
         style={{
           background: "rgba(0,0,0,0.5)",
           width: "100vw",
+          maxWidth: 900,
           height: "100vh",
           position: "fixed",
           opacity: type !== "none" ? 1 : 0,

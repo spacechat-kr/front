@@ -1,102 +1,165 @@
-import { useState } from "react";
-import { ButtonBase } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, ButtonBase } from "@mui/material";
 import Container from "@mui/material/Container";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import Map from "../components/Map";
-import { HomeHeader, IsHideHomeHeaderState } from "../components/pages/index.module";
+import { useRouter } from "next/router";
+import { HomeHeader, IsHideHomeHeaderState } from "../components/pages/index/HomeHeader";
+import { MapNavigation } from "../components/pages/index/MapNavigation";
 
 export default function Page() {
   return (
     <>
       <Container maxWidth="md" style={{ padding: 0 }}>
         <HomeHeader />
-        <Map />
-        <MapNavigation />
+        <div style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
+          <Map />
+          <MapNavigation />
+          <WriteModal />
+        </div>
       </Container>
     </>
   );
 }
 
-// https://levelup.gitconnected.com/how-to-use-google-maps-react-57ba97ca897b 현재위치가져오기
-// yarn add google-maps-react-markers
-// React-google map current location
-const MapNavigation = () => {
-  const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
-  const [isWrite, setIsWrite] = useState(false);
-  const onWrite = () => {
-    setIsHide((prev) => !prev);
-    setIsWrite((prev) => !prev);
-  };
-  return (
-    <div>
-      {/* <div
-        style={{
-          position: "fixed",
-          height: "100%",
-          top: 0,
-          width: "100vw",
-          maxWidth: 900,
-        }}
-      ></div> */}
-      <BottomWriteButton isWrite={isWrite} onWrite={onWrite} />
-    </div>
-  );
+const ModalList = {
+  write: {
+    imgSrc: "/icons/modalWrite.png",
+    confirmText: "여기에 쪽지 놓기",
+    cancelText: "다른 곳에 쪽지 놓기",
+    content: () => (
+      <>
+        채팅방뫄뫄
+        <br />
+        제발들어와주세요... <br />
+        제발들어와주세요... <br />
+        제발들어와주세요...
+      </>
+    ),
+  },
+  enter: {
+    imgSrc: "/icons/modalWrite.png",
+    confirmText: "참여하기",
+    cancelText: "취소",
+    content: () => (
+      <>
+        채팅방뫄뫄
+        <br />
+        제발들어와주세요... <br />
+        제발들어와주세요... <br />
+        제발들어와주세요...
+      </>
+    ),
+  },
+  out: {
+    imgSrc: "/icons/modalAlert.svg",
+    confirmText: "확인",
+    content: () => (
+      <>
+        내 위치 3km 이내에만
+        <br />
+        쪽지를 놓을 수 있어요!
+      </>
+    ),
+  },
+  none: {
+    cancelText: "",
+    content: () => <div></div>,
+  },
 };
+let remainType = "none";
+export const WriteModal = () => {
+  const router = useRouter();
+  const [type, setType] = useState<"write" | "none">("none");
 
-const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: () => void }) => {
+  useEffect(() => {
+    if (!router.asPath.includes("#") && ["write", "none"].includes(type)) remainType = type;
+    const aftertype = router.asPath.split("#")[1] as any;
+    setType(aftertype ? aftertype : "none");
+  }, [router]);
+
+  const modalTyle = type != "none" ? type : remainType;
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 24,
-        width: "100vw",
-        maxWidth: 900,
-        display: "flex",
-        justifyContent: "right",
-      }}
-    >
+    <>
       <div
         style={{
+          background: "rgba(0,0,0,0.5)",
+          width: "100vw",
+          maxWidth: 900,
+          height: "100vh",
+          position: "fixed",
+          opacity: type !== "none" ? 1 : 0,
+          visibility: type !== "none" ? "visible" : "hidden",
+          // transition: "visibility ease-in 0.1s, opacity ease-in 0.1s",
+          zIndex: 1301,
+        }}
+        onClick={() => router.back()}
+      ></div>
+      <Box
+        sx={{
+          position: "fixed",
+          fontFamily: "AppleSDGothicNeo",
+          fontWeight: 500,
+          fontSize: 20,
+          lineHeight: "29px",
+          textAlign: "center",
+          letterSpacing: "-0.4px",
+          color: "black",
+          background: "white",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          minWidth: 300,
+          zIndex: 1302,
+          padding: "20px 28px 8px 28px",
+          span: {
+            color: "#E65555",
+            fontWeight: 700,
+          },
+          borderRadius: "10px",
+          opacity: type !== "none" ? 1 : 0,
+          visibility: type !== "none" ? "visible" : "hidden",
+          // transition: "visibility ease-in 0.1s, opacity ease-in 0.1s",
           display: "flex",
-          alignItems: "center",
-          position: "relative",
-          right: isWrite ? "50%" : "4%",
-          transform: isWrite ? "translate(50%, 0)" : "translate(0, 0)",
-          transition:
-            "right cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s, transform cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s",
+          flexDirection: "column",
+          button: {
+            borderRadius: "20px",
+            padding: 1,
+          },
+          "#confirm": {
+            fontFamily: "AppleSDGothicNeo",
+            background: "linear-gradient(90deg, #501788 4.55%, #724CC0 90.68%)",
+            marginTop: 2,
+            color: "white",
+            fontSize: 14,
+            lineHeight: "20px",
+            letterSpacing: "-0.4px",
+          },
+          "#cancel": {
+            marginTop: 1,
+            fontFamily: "AppleSDGothicNeo",
+            fontSize: 13,
+            color: "#551E8F",
+            lineHeight: "20px",
+            letterSpacing: "-0.4px",
+          },
         }}
       >
-        <ButtonBase sx={{ borderRadius: 100 }} onClick={onWrite}>
-          <img src="/icons/mapWrite.png" style={{ margin: "8px 8px 8px 0" }} />
-        </ButtonBase>
-        <div
-          style={{
-            width: isWrite ? 243 : 0,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            position: "relative",
-            transition: "width cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s",
-            right: 20,
-            zIndex: -1,
-          }}
-        >
-          <p
-            style={{
-              padding: "10px 16px",
-              borderRadius: isWrite ? 25 : 8,
-              transition: "border-radius cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s",
-              background: "white",
-              color: "black",
-              fontWeight: 500,
-              fontSize: 18,
-              lineHeight: "26px",
-              letterSpacing: "-0.4px",
-            }}
-          >
-            쪽지를 놓을 곳을 선택해주세요
-          </p>
+        <div style={{ height: 45, position: "relative", top: -85 }}>
+          <img
+            src={ModalList[modalTyle].imgSrc}
+            width="130px"
+            style={{ background: "white", border: "10px solid white", borderRadius: 100 }}
+          />
         </div>
-      </div>
-    </div>
+        {ModalList[modalTyle].content()}
+        <ButtonBase id="confirm" onClick={() => router.back()}>
+          {ModalList[modalTyle].confirmText}
+        </ButtonBase>
+        <ButtonBase id="cancel" onClick={() => router.back()}>
+          {ModalList[modalTyle].cancelText}
+        </ButtonBase>
+      </Box>
+    </>
   );
 };
