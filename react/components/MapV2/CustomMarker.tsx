@@ -8,5 +8,5 @@ export default function CustomMarker({
   position: google.maps.LatLng | google.maps.LatLngLiteral;
   clusterer: Clusterer;
 }) {
-  return <Marker position={position} clusterer={clusterer} />;
+  return <Marker position={position} clusterer={clusterer} icon="/icons/map/lv1.svg" />;
 }
