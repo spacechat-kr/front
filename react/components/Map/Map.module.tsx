@@ -1,32 +1,31 @@
 import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
-import GoogleMapReact from "google-map-react";
 import { mapStyle, mapStyleCustom, mapStyleGray } from "../../constant/mapStyle";
 
-export const options: (a: boolean, b: boolean) => GoogleMapReact.MapOptions = (
-  isFullScreen: boolean,
-  isFreezeSlide: boolean
-) => {
-  return {
-    minZoom: 12,
-    maxZoom: 20,
-    gestureHandling: isFreezeSlide ? "greedy" : "none",
-    mapTypeControl: isFreezeSlide,
-    scrollwheel: isFreezeSlide,
-    zoomControl: isFreezeSlide,
-    noClear: true,
-    clickableIcons: false,
-    fullscreenControl: isFreezeSlide,
-    disableDoubleClickZoom: true,
-    keyboardShortcuts: true,
-    backgroundColor: "white", //'#110043',
-    // backgroundColor: "transparent", //'#110043',
-    styles: [
-      mapStyleCustom(isFreezeSlide),
-      // ...(!isFullScreen && !isFreezeSlide ? mapStyleGray : mapStyle)
-    ],
-  };
-};
+// export const options: (a: boolean, b: boolean) => GoogleMapReact.MapOptions = (
+//   isFullScreen: boolean,
+//   isFreezeSlide: boolean
+// ) => {
+//   return {
+//     // minZoom: 12,
+//     maxZoom: 20,
+//     gestureHandling: isFreezeSlide ? "greedy" : "none",
+//     mapTypeControl: isFreezeSlide,
+//     scrollwheel: isFreezeSlide,
+//     zoomControl: isFreezeSlide,
+//     noClear: true,
+//     clickableIcons: false,
+//     fullscreenControl: isFreezeSlide,
+//     disableDoubleClickZoom: true,
+//     keyboardShortcuts: true,
+//     backgroundColor: "white", //'#110043',
+//     // backgroundColor: "transparent", //'#110043',
+//     styles: [
+//       mapStyleCustom(isFreezeSlide),
+//       // ...(!isFullScreen && !isFreezeSlide ? mapStyleGray : mapStyle)
+//     ],
+//   };
+// };
 
 export type StyleProps = {
   isMobile: boolean | null;

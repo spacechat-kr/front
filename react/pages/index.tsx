@@ -1,8 +1,9 @@
-import { Box, ButtonBase, FormControl, FormHelperText, Input, InputAdornment, TextareaAutosize } from "@mui/material";
+import { Box, ButtonBase, FormControl, FormHelperText, Input } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useRouter } from "next/router";
-import { useEffect, useState, useRef } from "react";
-import Map from "../components/Map";
+import { useEffect, useRef, useState } from "react";
+// import Map from "../components/Map";
+import MapContainer from "../components/MapV2/MapContainer";
 import { HomeHeader } from "../components/pages/index/HomeHeader";
 import { MapNavigation } from "../components/pages/index/MapNavigation";
 
@@ -12,7 +13,8 @@ export default function Page() {
       <Container maxWidth="md" style={{ padding: 0 }}>
         <HomeHeader />
         <div style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
-          <Map />
+          {/* <Map /> */}
+          <MapContainer />
           <MapNavigation />
           <WriteModal />
         </div>
