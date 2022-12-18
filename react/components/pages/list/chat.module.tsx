@@ -1,6 +1,7 @@
 import { ArrowBackIosNewRounded } from "@mui/icons-material";
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
+import { MouseEventHandler } from "react";
 
 export const ChatCard = ({
   message = "",
@@ -8,27 +9,32 @@ export const ChatCard = ({
   badge = 0,
   name = "",
   profile = "https://picsum.photos/70/70",
+  isTopBorder = false,
+  onClick,
 }: {
+  isTopBorder?: boolean;
   message?: string;
   time?: string;
   badge?: number;
   name?: string;
   profile?: string;
-  }) => {
-  const router = useRouter();
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+}) => {
   return (
     <ButtonBase
       style={{
-        height: 94,
+        // height: 98,
         padding: "0 20px",
         width: "100%",
         background: "white",
       }}
-      onClick={()=>router.push('/chat/2')}
+      onClick={onClick}
+      disabled={!onClick}
     >
       <div
         style={{
-          borderBottom: "solid 2px #c4c4c4c2",
+          border: "solid 1px #c4c4c4c2",
+          borderStyle: isTopBorder ? "solid none solid none" : "none none solid none",
           display: "flex",
           justifyContent: "space-between",
           width: "100%",
@@ -84,7 +90,7 @@ export const ChatCard = ({
   );
 };
 export const BackHeader = () => {
-	const router = useRouter();
+  const router = useRouter();
   return (
     <div
       style={{
@@ -98,7 +104,7 @@ export const BackHeader = () => {
         zIndex: 1,
       }}
     >
-      <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }} onClick={()=>router.back()}>
+      <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }} onClick={() => router.back()}>
         <ArrowBackIosNewRounded style={{ fontSize: 24, color: "#212121" }} />
       </ButtonBase>
     </div>

@@ -2,8 +2,8 @@ import { Box, ButtonBase, FormControl, FormHelperText, Input } from "@mui/materi
 import Container from "@mui/material/Container";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import MapContainer from "../components/Map/MapContainer";
 // import Map from "../components/Map";
-import MapContainer from "../components/MapV2/MapContainer";
 import { HomeHeader } from "../components/pages/index/HomeHeader";
 import { MapNavigation } from "../components/pages/index/MapNavigation";
 

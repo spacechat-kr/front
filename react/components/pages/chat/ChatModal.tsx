@@ -67,7 +67,7 @@ export const ChatModal = () => {
           position: "fixed",
           opacity: type !== "none" ? 1 : 0,
           visibility: type !== "none" ? "visible" : "hidden",
-          // transition: "visibility ease-in 0.1s, opacity ease-in 0.1s",
+          transition: "visibility 0.2s, opacity 0.2s",
           zIndex: 1301,
         }}
         onClick={() => router.back()}
@@ -96,7 +96,7 @@ export const ChatModal = () => {
           borderRadius: "10px",
           opacity: type !== "none" ? 1 : 0,
           visibility: type !== "none" ? "visible" : "hidden",
-          // transition: "visibility ease-in 0.1s, opacity ease-in 0.1s",
+          transition: "visibility 0.2s, opacity 0.2s",
           display: "flex",
           flexDirection: "column",
           button: {

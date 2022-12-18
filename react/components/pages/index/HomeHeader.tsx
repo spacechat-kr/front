@@ -26,7 +26,7 @@ export const HomeHeader = () => {
   }, []);
 
   const onClickChat = () => router.push("/list/chat");
-  const onClickSetting = () => router.push("/option/home");
+  const onClickSetting = () => router.push("/option");
 
   return (
     <header

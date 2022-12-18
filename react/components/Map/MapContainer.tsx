@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
 import Map from "./Map";
@@ -33,7 +33,7 @@ const locationList = Array.from({ length: 5000 }).map((i) => {
 export default function MapContainer() {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markerList, setMarkerList] = useState<{ lat: number; lng: number }[]>(locationList);
-  const [isWrite, setIsWrite] = useRecoilState(IsWriteState);
+  const isWrite = useRecoilValue(IsWriteState);
   const router = useRouter();
 
   useEffect(() => {
