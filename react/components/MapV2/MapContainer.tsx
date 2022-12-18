@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
@@ -33,6 +34,7 @@ export default function MapContainer() {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markerList, setMarkerList] = useState<{ lat: number; lng: number }[]>(locationList);
   const [isWrite, setIsWrite] = useRecoilState(IsWriteState);
+  const router = useRouter();
 
   useEffect(() => {
     /** 마커 모두 보이는곳으로 이동, 추후 3km 반경보는곳으로 이동하는것도 가능 */
@@ -63,7 +65,7 @@ export default function MapContainer() {
       fillOpacity: 0.35,
     },
   };
-
+  const onClickMarker = () => router.push("#enter");
   return (
     <Box
       sx={{
@@ -109,6 +111,7 @@ export default function MapContainer() {
                   key={id}
                   position={loc}
                   clusterer={clusterer}
+                  onClick={onClickMarker}
                   // styles: [
                   //   {
                   //     fontFamily: "asd",
