@@ -1,6 +1,6 @@
 {
   "name": "space",
-  "version": "0.1.85",
+  "version": "0.1.86",
   "private": true,
   "scripts": {
     "lint": "next lint",
