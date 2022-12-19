@@ -39,7 +39,7 @@ export const MapNavigation = () => {
         <div style={{ marginTop: 16, height: 0, pointerEvents: "fill" }}>
           <ButtonBase
             style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16 }}
-            onClick={() => router.push("#write")}
+            onClick={() => router.push("#create")}
           >
             여기에 놓기(임시)
           </ButtonBase>
@@ -69,13 +69,12 @@ const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: ()
           alignItems: "center",
           position: "relative",
           right: isWrite ? "50%" : "4%",
-          transform: `translate(${isWrite ? "50%" : "0"}, 0)`,
-          transition:
-            "right cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s, transform cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s",
+          transform: `translateX(${isWrite ? "50%" : "0"})`,
+          transition: "right 0.4s, transform 0.4s",
         }}
       >
         <ButtonBase sx={{ borderRadius: 100 }} onClick={onWrite}>
-          <img src="/icons/mapWrite.png" style={{ margin: "8px 8px 8px 0" }} />
+          <img src="/icons/mapWrite4x.png" style={{ margin: "8px 8px 8px 0" }} width="87px" />
         </ButtonBase>
         <div
           style={{
@@ -83,7 +82,7 @@ const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: ()
             whiteSpace: "nowrap",
             overflow: "hidden",
             position: "relative",
-            transition: "width cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s",
+            transition: "width 0.4s",
             right: 20,
             zIndex: -1,
           }}
@@ -92,7 +91,7 @@ const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: ()
             style={{
               padding: "10px 16px 10px 20px",
               borderRadius: isWrite ? 25 : 8,
-              transition: "border-radius cubic-bezier(0.000, 1.100, 0.365, 0.945) 0.4s",
+              transition: "border-radius 0.4s",
               background: "white",
               color: "black",
               fontWeight: 500,

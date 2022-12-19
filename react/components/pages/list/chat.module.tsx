@@ -94,7 +94,9 @@ export const BackHeader = () => {
   return (
     <div
       style={{
-        position: "sticky",
+        position: "fixed",
+        width: "100vw",
+        maxWidth: 900,
         top: 0,
         background: "white",
         boxShadow: "0px 0 2px rgba(0, 0, 0, 0.15)",

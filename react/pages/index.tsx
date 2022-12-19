@@ -2,10 +2,11 @@ import { Box, ButtonBase, FormControl, FormHelperText, Input } from "@mui/materi
 import Container from "@mui/material/Container";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { useSetRecoilState } from "recoil";
 import MapContainer from "../components/Map/MapContainer";
 // import Map from "../components/Map";
-import { HomeHeader } from "../components/pages/index/HomeHeader";
-import { MapNavigation } from "../components/pages/index/MapNavigation";
+import { HomeHeader, IsHideHomeHeaderState } from "../components/pages/index/HomeHeader";
+import { IsWriteState, MapNavigation } from "../components/pages/index/MapNavigation";
 
 export default function Page() {
   return (
@@ -16,7 +17,7 @@ export default function Page() {
           {/* <Map /> */}
           <MapContainer />
           <MapNavigation />
-          <WriteModal />
+          <CreateModal />
         </div>
       </Container>
     </>
@@ -46,8 +47,8 @@ const InputDescStyle = {
   height: "2.5em",
 };
 const ModalList = {
-  write: {
-    imgSrc: "/icons/modalWrite.png",
+  create: {
+    imgSrc: "/icons/modalCreate.png",
     confirmText: "여기에 쪽지 놓기",
     cancelText: "다른 곳에 쪽지 놓기",
     content: (titleRef, descRef) => {
@@ -116,7 +117,7 @@ const ModalList = {
     },
   },
   enter: {
-    imgSrc: "/icons/modalWrite.png",
+    imgSrc: "/icons/modalCreate.png",
     confirmText: "참여하기",
     cancelText: "취소",
     content: () => (
@@ -140,25 +141,43 @@ const ModalList = {
       </>
     ),
   },
-  none: {
+  write: {
     cancelText: "",
     content: () => <div></div>,
   },
+  none: {
+    cancelText: "",
+    content: () => null,
+  },
 };
 let remainType = "none";
-export const WriteModal = () => {
+export const CreateModal = () => {
   const router = useRouter();
-  const [type, setType] = useState<"write" | "none">("none");
+  const [type, setType] = useState<"write" | "create" | "none">("none");
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
 
+  const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
+  const setIsWrite = useSetRecoilState(IsWriteState);
+  const onWrite = () => {
+    setIsHide(true);
+    setIsWrite(true);
+  };
+  const onWriteLeave = () => {
+    setIsHide(false);
+    setIsWrite(false);
+  };
+
   useEffect(() => {
-    if (!router.asPath.includes("#") && ["write", "none"].includes(type)) remainType = type;
+    if (!router.asPath.includes("#") && ["write", "create", "none"].includes(type)) remainType = type;
     const aftertype = router.asPath.split("#")[1] as any;
     setType(aftertype ? aftertype : "none");
+    if (["write", "create"].includes(aftertype)) onWrite();
+    else onWriteLeave();
   }, [router]);
 
-  const modalTyle = type != "none" ? type : remainType;
+  const modalType = type != "none" ? type : remainType;
+  if (modalType === "write") return <></>;
   return (
     <>
       <div
@@ -227,12 +246,12 @@ export const WriteModal = () => {
       >
         <div style={{ height: 45, position: "relative", top: -85 }}>
           <img
-            src={ModalList[modalTyle].imgSrc}
+            src={ModalList[modalType].imgSrc}
             width="130px"
             style={{ background: "white", border: "10px solid white", borderRadius: 100 }}
           />
         </div>
-        {ModalList[modalTyle].content(titleRef, descRef)}
+        {ModalList[modalType].content(titleRef, descRef)}
         <ButtonBase
           id="confirm"
           onClick={() => {
@@ -241,10 +260,10 @@ export const WriteModal = () => {
             if (descRef.current) descRef.current.value = " ";
           }}
         >
-          {ModalList[modalTyle].confirmText}
+          {ModalList[modalType].confirmText}
         </ButtonBase>
         <ButtonBase id="cancel" onClick={() => router.back()}>
-          {ModalList[modalTyle].cancelText}
+          {ModalList[modalType].cancelText}
         </ButtonBase>
       </Box>
     </>

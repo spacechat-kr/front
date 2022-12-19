@@ -1,7 +1,10 @@
-import { Box, ButtonBase } from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
+import { Box, ButtonBase, Checkbox } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { ExampleChatList } from "../../../pages/list/chat";
 import { ChatCard } from "../list/chat.module";
+import { NoChatList } from "./NoChatList";
 
 let remainType = "none";
 
@@ -68,130 +71,43 @@ export const ExportModal = () => {
             justifyContent: "center",
             flexDirection: "column",
             textAlign: "center",
-            overflow: "scroll",
-            // height: "100%",
+            height: "100%",
           }}
         >
           <ButtonBase
             sx={{ borderRadius: 1, padding: "16px 32px 32px 32px", m: 0 }}
             disableRipple
-            onMouseDown={() => router.back()}
-            onTouchStart={() => router.back()}
+            onMouseDown={(e) => {
+              router.back();
+            }}
+            onTouchStart={(e) => {
+              router.back();
+              e.stopPropagation();
+            }}
           >
             <img src="/icons/option/downChatList.svg" />
           </ButtonBase>
           <div style={{ marginBottom: 16 }}>텍스트로 내보낼 채팅방을 선택해주세요.</div>
-          <ChatCard
-            isTopBorder
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="13:04 PM"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="01:04 AM"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="12/04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="11/04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2022.11.04."
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2022.09.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2021.01.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2020.11.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="01:04 AM"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="12/04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="11/04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2022.11.04."
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2022.09.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2021.01.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2020.11.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="01:04 AM"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="12/04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="11/04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2022.11.04."
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2022.09.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2021.01.04"
-          />
-          <ChatCard
-            name="채팅방뫄뫄"
-            message="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
-            time="2020.11.04"
-          />
+
+          <div style={{ overflow: "scroll", height: "100%" }}>
+            {ExampleChatList.length === 0 ? (
+              <NoChatList />
+            ) : (
+              ExampleChatList.map((i) => {
+                return (
+                  <div key={i.key} style={{ display: "flex", alignItems: "center" }}>
+                    <Checkbox color="default" />
+                    <ChatCard
+                      name={i.name}
+                      message={i.message}
+                      time={i.created_at}
+                      onClick={() => router.push(`/chat/${i.key}`)}
+                    />
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
       </Box>
     </>
