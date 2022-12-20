@@ -1,5 +1,5 @@
 import { ArrowBackIosNewRounded } from "@mui/icons-material";
-import { ButtonBase } from "@mui/material";
+import { ButtonBase, SxProps, Theme } from "@mui/material";
 import { useRouter } from "next/router";
 import { MouseEventHandler } from "react";
 
@@ -11,6 +11,11 @@ export const ChatCard = ({
   profile = "https://picsum.photos/70/70",
   isTopBorder = false,
   onClick,
+  sx = {
+    padding: "0 20px",
+    width: "100%",
+    background: "white",
+  },
 }: {
   isTopBorder?: boolean;
   message?: string;
@@ -19,18 +24,10 @@ export const ChatCard = ({
   name?: string;
   profile?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  sx?: SxProps<Theme>;
 }) => {
   return (
-    <ButtonBase
-      style={{
-        // height: 98,
-        padding: "0 20px",
-        width: "100%",
-        background: "white",
-      }}
-      onClick={onClick}
-      disabled={!onClick}
-    >
+    <ButtonBase sx={sx} onClick={onClick} disabled={!onClick}>
       <div
         style={{
           border: "solid 1px #c4c4c4c2",

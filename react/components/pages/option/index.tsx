@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { ExampleChatList } from "../../../pages/list/chat";
 import { ChatCard } from "../list/chat.module";
 import { NoChatList } from "./NoChatList";
-
+import { useRef } from "react";
 let remainType = "none";
 
 export const ExportModal = () => {
   const router = useRouter();
   const [type, setType] = useState<"export" | "none">("none");
-
+  const checkRef = useRef<HTMLInputElement[]>([]);
   useEffect(() => {
     if (!router.asPath.includes("#") && ["export", "none"].includes(type)) remainType = type;
     const aftertype = router.asPath.split("#")[1] as any;
@@ -77,10 +77,7 @@ export const ExportModal = () => {
           <ButtonBase
             sx={{ borderRadius: 1, padding: "16px 32px 32px 32px", m: 0 }}
             disableRipple
-            onMouseDown={(e) => {
-              router.back();
-            }}
-            onTouchStart={(e) => {
+            onClick={(e) => {
               router.back();
               e.stopPropagation();
             }}
@@ -93,16 +90,25 @@ export const ExportModal = () => {
             {ExampleChatList.length === 0 ? (
               <NoChatList />
             ) : (
-              ExampleChatList.map((i) => {
+              ExampleChatList.map((item, i) => {
                 return (
-                  <div key={i.key} style={{ display: "flex", alignItems: "center" }}>
-                    <Checkbox color="default" />
-                    <ChatCard
-                      name={i.name}
-                      message={i.message}
-                      time={i.created_at}
-                      onClick={() => router.push(`/chat/${i.key}`)}
+                  <div key={item.key} style={{ display: "flex", alignItems: "center" }}>
+                    <Checkbox
+                      color="default"
+                      sx={{ p: 0, width: "6vw", maxWidth: 32 }}
+                      inputRef={(ref) => {
+                        if (ref) checkRef.current.push(ref);
+                      }}
                     />
+                    <div style={{ flex: 1 }}>
+                      <ChatCard
+                        sx={{ padding: "0 20px 0 12px", width: "100%", background: "white" }}
+                        name={item.name}
+                        message={item.message}
+                        time={item.created_at}
+                        onClick={() => checkRef.current[i].click()}
+                      />
+                    </div>
                   </div>
                 );
               })
