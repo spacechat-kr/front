@@ -6852,6 +6852,11 @@ side-channel@^1.0.4:
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
 
+simple-text-compress@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/simple-text-compress/-/simple-text-compress-0.1.1.tgz#485280c8a934d4cfbeb5ffa61a038be94816e183"
+  integrity sha512-W1DUog6De2dy8nYP3MIbl+2bN3fxzlWRyh+CZDtlYsJcpbPQiVrbYZZqlnzbrfYpRbsPTGsa8EXQatJ2VI5n1w==
+
 slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/slash/-/slash-3.0.0.tgz"
