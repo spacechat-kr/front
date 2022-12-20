@@ -1,11 +1,13 @@
 import { CheckBox } from "@mui/icons-material";
 import { Box, ButtonBase, Checkbox } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ExampleChatList } from "../../../pages/list/chat";
 import { ChatCard } from "../list/chat.module";
 import { NoChatList } from "./NoChatList";
 import { useRef } from "react";
+import dayjs from "dayjs";
+
 let remainType = "none";
 
 export const ExportModal = () => {
@@ -17,6 +19,313 @@ export const ExportModal = () => {
     const aftertype = router.asPath.split("#")[1] as any;
     setType(aftertype ? aftertype : "none");
   }, [router]);
+
+  const onClickExport = useCallback(() => {
+    let fileName = `spacechat_${dayjs().toISOString()}.txt`;
+    const metadata = {
+      user_id: "asd",
+      device_id: "asd",
+      chatList: [
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+        {
+          post_id: 1,
+          messageList: [
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+            { chat_id: 1, message: "asdawda", created_at: "2018-10-02T15:23:21" },
+          ],
+        },
+      ],
+    };
+    let output = JSON.stringify(metadata);
+    const element = document.createElement("a");
+    const file = new Blob([output], {
+      type: "text/plain",
+    });
+    element.href = URL.createObjectURL(file);
+    element.download = fileName;
+    document.body.appendChild(element); // FireFox
+    element.click();
+  }, []);
 
   return (
     <>
@@ -86,7 +395,7 @@ export const ExportModal = () => {
           </ButtonBase>
           <div style={{ marginBottom: 16 }}>텍스트로 내보낼 채팅방을 선택해주세요.</div>
 
-          <div style={{ overflow: "scroll", height: "100%" }}>
+          <div style={{ overflow: "scroll", height: "100%", marginBottom: 16, paddingBottom: 16 }}>
             {ExampleChatList.length === 0 ? (
               <NoChatList />
             ) : (
@@ -113,6 +422,35 @@ export const ExportModal = () => {
                 );
               })
             )}
+          </div>
+          <div
+            style={{
+              justifyContent: "center",
+              display: "fixed",
+
+              left: 0,
+              width: "calc(100vw - 80px)",
+              maxWidth: 820,
+            }}
+          >
+            <ButtonBase
+              style={{
+                maxWidth: 400,
+                background: "linear-gradient(90deg, #501788 4.55%, #724CC0 90.68%)",
+                borderRadius: 20,
+                fontFamily: "AppleSDGothicNeo",
+                fontSize: 14,
+                bottom: 24,
+                lineHeight: "20px",
+                letterSpacing: "-0.4px",
+                width: "100%",
+                padding: 14,
+                color: "white",
+              }}
+              onClick={onClickExport}
+            >
+              내보내기
+            </ButtonBase>
           </div>
         </div>
       </Box>
