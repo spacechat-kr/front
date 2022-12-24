@@ -14,7 +14,6 @@ export default function Page() {
       <Container maxWidth="md" style={{ padding: 0 }}>
         <HomeHeader />
         <div style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
-          {/* <Map /> */}
           <MapContainer />
           <MapNavigation />
           <CreateModal />

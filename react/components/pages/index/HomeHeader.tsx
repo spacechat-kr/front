@@ -6,7 +6,7 @@ import { Settings } from "@mui/icons-material";
 import { useRouter } from "next/router";
 
 const HomeHeightState = atom<number>({ key: "HomeHeightState", default: 1000 });
-const IsHomeHeaderState = atom<boolean>({ key: "IsHomeHeaderState", default: false });
+export const IsHomeHeaderState = atom<boolean>({ key: "IsHomeHeaderState", default: false });
 export const IsHideHomeHeaderState = atom<boolean>({ key: "IsHideHomeHeaderState", default: false });
 
 export const HomeHeader = () => {

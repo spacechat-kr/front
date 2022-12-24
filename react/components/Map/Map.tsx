@@ -1,5 +1,7 @@
 import { Box } from "@mui/material";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { IsHideHomeHeaderState, IsHomeHeaderState } from "../pages/index/HomeHeader";
 
 const defaultCenter = { lat: 28.612734, lng: 77.231178 };
 
@@ -17,6 +19,7 @@ export default function Map({
   setMap: (map: google.maps.Map) => void;
   children: JSX.Element | JSX.Element[];
 }) {
+  const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCwoQM-TnxyGry-EgM7dZ5Jh-ymTi1rdZU",
     // ...otherOptions
@@ -41,6 +44,9 @@ export default function Map({
           center={defaultCenter}
           options={options}
           onLoad={loadHandler}
+          onDragStart={() => {
+            if (isOpen) setIsOpen(false);
+          }}
         >
           {children}
         </GoogleMap>
