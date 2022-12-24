@@ -32,7 +32,7 @@ export const MenuList = () => {
             className="button"
             onClick={() =>
               window.open(
-                `mailto:cs@spacechat.com?subject=[Space-Chat 문의]: (제목)&body=본인의 이름과 스크린샷을 첨부해주세요. (추가 내용)`
+                `mailto:cs@spacechat.kr?subject=[Space-Chat 문의]: (제목)&body=본인의 이름과 스크린샷을 첨부해주세요. (추가 내용)`
               )
             }
           >
