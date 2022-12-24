@@ -1,29 +1,14 @@
-import { CheckBox } from "@mui/icons-material";
 import { Box, ButtonBase, Checkbox } from "@mui/material";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { metadata } from "../../../constant/testData";
 import { ExampleChatList } from "../../../pages/list/chat";
+import { encrypt } from "../../ignore/Crypto";
 import { ChatCard } from "../list/chat.module";
 import { NoChatList } from "./NoChatList";
-import { useRef } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { decrypt, encrypt } from "../../ignore/Crypto";
-import { compress, decompress } from "simple-text-compress";
 
 let remainType = "none";
-
-const metadata = {
-  user_id: "asd",
-  device_id: "asd",
-  chatList: Array.from({ length: 500 }).map((item: any, i) => {
-    return {
-      post_id: 1,
-      messageList: Array.from({ length: 2300 }).map((item2: any, j) => {
-        return { chat_id: 1, message: "asdawda", created_at: dayjs().add(i, "day").add(j, "hour") };
-      }),
-    };
-  }),
-};
 
 export const ExportModal = () => {
   const router = useRouter();
@@ -41,15 +26,15 @@ export const ExportModal = () => {
     setTimeout(() => {
       let fileName = `spacechat_${dayjs().toISOString()}.txt`;
 
-      // 1. 내보내기 - 암호화
-      const encryptedText = encrypt(JSON.stringify(metadata));
+      // 1. 내보내기 - 암호화 -> 백엔드에서 처리 후에 프론트로 받아와야할 것 같은데 백엔드 성능이 낮으니깐 무시..?
+      // const encryptedText = encrypt(JSON.stringify(metadata));
 
       // 2. 불러오기 - 복호화
       // const decryptedText = decrypt(encryptedText);
       // console.log("decryptedText", decryptedText);
 
       const element = document.createElement("a");
-      const file = new Blob([encryptedText], {
+      const file = new Blob([JSON.stringify(metadata)], {
         type: "text/plain",
       });
       element.href = URL.createObjectURL(file);
