@@ -117,7 +117,6 @@ export const InputBox = () => {
     <div style={{ background: "#1d202d", display: "flex", alignItems: "end" }}>
       <FileInputIcon />
       <TextareaAutosize
-        autoFocus
         onChange={(t) => setValue(t.target.value)}
         ref={TextareaRef}
         style={{
