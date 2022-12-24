@@ -103,8 +103,8 @@ export const BackHeader = () => {
         zIndex: 1,
       }}
     >
-      <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }} onClick={() => router.back()}>
-        <ArrowBackIosNewRounded style={{ fontSize: 24, color: "#212121" }} />
+      <ButtonBase sx={{ ml: 2, borderRadius: 4, padding: 1 }}>
+        <ArrowBackIosNewRounded style={{ fontSize: 28, color: "#212121" }} onClick={router.back} />
       </ButtonBase>
     </div>
   );

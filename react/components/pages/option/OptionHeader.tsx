@@ -42,12 +42,17 @@ export const OptionHeader = () => {
           top: 0,
           display: "flex",
           justifyContent: "space-between",
+          height: 60,
+          alignItems: "center",
         }}
       >
         <div>
-          <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={router.back}>
-            <ArrowBackIosNewRounded style={{ fontSize: 33, color: "#CEC2FF" }} />
+          <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }}>
+            <ArrowBackIosNewRounded style={{ fontSize: 28, color: "#CEC2FF" }} onClick={router.back} />
           </ButtonBase>
+          {/* <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={router.back}>
+            <ArrowBackIosNewRounded style={{ fontSize: 33, color: "#CEC2FF" }} />
+          </ButtonBase> */}
         </div>
         <div>
           {/* <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={onClickSetting}>

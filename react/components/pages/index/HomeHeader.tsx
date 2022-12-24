@@ -48,22 +48,30 @@ export const HomeHeader = () => {
           maxWidth: 900,
           position: "fixed",
           top: 0,
-          display: "flex",
-          justifyContent: "space-between",
           opacity: isOpen ? 1 : 0,
           visibility: isOpen ? "visible" : "hidden",
           transition: "visibility 0.2s, opacity 0.2s",
+          height: 60,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <div>
-          <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={onClickChat}>
+          <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }} onClick={onClickChat}>
             <SmsRoundedIcon style={{ fontSize: 33, transform: "scaleX(-1)", color: "#CEC2FF" }} />
           </ButtonBase>
+          {/* <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={onClickChat}>
+            <SmsRoundedIcon style={{ fontSize: 33, transform: "scaleX(-1)", color: "#CEC2FF" }} />
+          </ButtonBase> */}
         </div>
         <div>
-          <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={onClickSetting}>
+          <ButtonBase sx={{ mr: 1.5, borderRadius: 4, padding: 1 }} onClick={onClickSetting}>
             <Settings style={{ fontSize: 33, color: "#CEC2FF" }} />
           </ButtonBase>
+          {/* <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 16 }} onClick={onClickSetting}>
+            <Settings style={{ fontSize: 33, color: "#CEC2FF" }} />
+          </ButtonBase> */}
         </div>
       </div>
       <img src="/images/header_background.svg" width="100%" />

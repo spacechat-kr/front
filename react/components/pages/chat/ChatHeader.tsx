@@ -28,7 +28,7 @@ export const ChatHeader = () => {
         }}
       >
         <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }}>
-          <ArrowBackIosNewRounded style={{ fontSize: 24, color: "#ffffff" }} onClick={router.back} />
+          <ArrowBackIosNewRounded style={{ fontSize: 28, color: "#ffffff" }} onClick={router.back} />
         </ButtonBase>
         <h3
           style={{
