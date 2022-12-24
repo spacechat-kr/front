@@ -28,7 +28,14 @@ export const MenuList = () => {
             <p className="button">자주 묻는 질문</p>
             <ArrowForwardIosRounded style={{ marginBottom: 2.3 }} />
           </ButtonBase>
-          <ButtonBase className="button">
+          <ButtonBase
+            className="button"
+            onClick={() =>
+              window.open(
+                `mailto:cs@spacechat.com?subject=[Space-Chat 문의]: (제목)&body=본인의 이름과 스크린샷을 첨부해주세요. (추가 내용)`
+              )
+            }
+          >
             <p className="button">문의하기</p>
             <ArrowForwardIosRounded style={{ marginBottom: 2.3 }} />
           </ButtonBase>
