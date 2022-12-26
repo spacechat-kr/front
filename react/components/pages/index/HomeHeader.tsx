@@ -82,6 +82,7 @@ export const HomeHeader = () => {
         >
           <img src="/icons/homeLogo.svg" style={{ marginBottom: 4 }} width={85} />
           <ButtonBase
+            onClick={() => router.push("/option#name")}
             style={{
               fontWeight: 400,
               fontSize: 28,
