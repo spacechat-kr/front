@@ -1,6 +1,6 @@
 import { ButtonBase } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { atom, useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
 import { Settings } from "@mui/icons-material";
 import { useRouter } from "next/router";
@@ -11,7 +11,7 @@ import { ax } from "../../../pages/_app";
 const HomeHeightState = atom<number>({ key: "HomeHeightState", default: 1000 });
 export const IsHomeHeaderState = atom<boolean>({ key: "IsHomeHeaderState", default: false });
 export const IsHideHomeHeaderState = atom<boolean>({ key: "IsHideHomeHeaderState", default: false });
-const userDataState = atom<{ uuid: string; name: string | null }>({
+export const userDataState = atom<{ uuid: string; name: string | null }>({
   key: "userDataState",
   default: { uuid: uuid(), name: null },
   effects_UNSTABLE: [localStorageEffect("/cache/userDataState")],
@@ -23,13 +23,14 @@ export const HomeHeader = () => {
   const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
   const isHide = useRecoilValue(IsHideHomeHeaderState);
   const headerRef = useRef<HTMLDivElement>(null);
-  const [userData, setUserData] = useRecoilState(userDataState);
+  const userData = useRecoilValue(userDataState);
+  const [name, setName] = useState<string | null>(null);
   useEffect(() => {
-    const handleResize = () => {
-      if (headerRef.current) setHeight(Math.max(headerRef.current.clientHeight - 305.88, 0));
-    };
+    const handleResize = () =>
+      headerRef.current ? setHeight(Math.max(headerRef.current.clientHeight - 305.88, 0)) : null;
     window.addEventListener("resize", handleResize);
     handleResize();
+    setName(userData.name);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -70,24 +71,28 @@ export const HomeHeader = () => {
             <SmsRoundedIcon style={{ fontSize: 33, transform: "scaleX(-1)", color: "#CEC2FF" }} />
           </ButtonBase>
         </div>
-        <div>
-          <input
-            defaultValue={userData.name ? userData.name : undefined}
-            placeholder="이름을 정해주세요."
-            onBlur={(e) => {
-              const name = e.target.value;
-              const isChange = confirm(`${name}로 이름을 변경하시겠습니까?`);
-              if (isChange) {
-                setUserData((prev) => {
-                  return { ...prev, name: name };
-                });
-                if (!userData.name) ax.post(`/user/create`, { name, userId: userData.uuid });
-                else ax.post(`/user/update`, { name, userId: userData.uuid });
-              } else {
-                e.target.value = userData.name ? userData.name : "";
-              }
+        <div
+          style={{
+            display: "flex",
+            marginTop: 238,
+            flexDirection: "column",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <img src="/icons/homeLogo.svg" style={{ marginBottom: 4 }} width={85} />
+          <ButtonBase
+            style={{
+              fontWeight: 400,
+              fontSize: 28,
+              lineHeight: "41px",
+              letterSpacing: "-0.4px",
+              color: name ? "#e5e5e5" : "#e5e5e567",
+              padding: "4px 16px",
             }}
-          ></input>
+          >
+            {name ? name : "Undefined"}
+          </ButtonBase>
         </div>
         <div>
           <ButtonBase sx={{ mr: 1.5, borderRadius: 4, padding: 1 }} onClick={onClickSetting}>

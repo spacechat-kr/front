@@ -23,7 +23,7 @@ export default function Page() {
   );
 }
 
-const InputTitleStyle = {
+export const InputTitleStyle = {
   fontFamily: "AppleSDGothicNeo",
   fontWeight: 400,
   fontSize: 20,
@@ -33,7 +33,7 @@ const InputTitleStyle = {
   padding: "0",
   outline: "none",
 };
-const InputDescStyle = {
+export const InputDescStyle = {
   fontFamily: "AppleSDGothicNeo",
   fontWeight: 400,
   fontSize: 15,

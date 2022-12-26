@@ -52,7 +52,10 @@ export const MenuBox = () => {
             flex: 1,
           }}
         >
-          <ButtonBase style={{ borderRadius: 8, padding: 4, margin: 4, flexDirection: "column", flex: 1 }}>
+          <ButtonBase
+            style={{ borderRadius: 8, padding: 4, margin: 4, flexDirection: "column", flex: 1 }}
+            onClick={() => router.push("#name")}
+          >
             <img src="/icons/option/changeNickname.svg" />
             <p className="txt">이름수정</p>
           </ButtonBase>
