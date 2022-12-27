@@ -33,7 +33,10 @@ export const HomeHeader = () => {
     if (userData.name) setName(userData.name);
     else setName(null);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [router]);
+  useEffect(() => {
+    if (isOpen) setIsOpen(false);
+  }, [router]);
 
   const onClickChat = () => router.push("/list/chat");
   const onClickSetting = () => router.push("/option");
