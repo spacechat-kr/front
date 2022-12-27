@@ -2,16 +2,16 @@ import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
-import Map from "./Map";
+import Map, { defaultCenter } from "./Map";
 
 /**
  * 임시 테스트용 마커 리스트
  */
 const locationList = Array.from({ length: 5000 }).map((i) => {
-  const center = { lat: 37.494295, lng: 127.1329049 };
+  const center = defaultCenter;
   const lat = Math.floor(Math.random() * 1000 - 500) / 5000 + center.lat;
   const lng = Math.floor(Math.random() * 1000 - 500) / 5000 + center.lng;
   const { maxLat, minLat, maxLng, minLng } = {
@@ -53,10 +53,7 @@ export default function MapContainer() {
 
   const place = {
     id: 1,
-    position: {
-      lat: 37.494295,
-      lng: 127.1329049,
-    },
+    position: defaultCenter,
     radius: 3000,
     style: {
       strokeColor: "#616779",
@@ -82,7 +79,7 @@ export default function MapContainer() {
         },
       }}
     >
-      <Map setMap={setMap}>
+      <Map setMap={setMap} map={map}>
         <MarkerClusterer>
           {(clusterer) =>
             markerList.map((loc, id) => {

@@ -3,14 +3,16 @@
 
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import { atom, useSetRecoilState, useRecoilState } from "recoil";
+import { atom, useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import { IsHideHomeHeaderState } from "./HomeHeader";
 
 // React-google map current location
 export const IsWriteState = atom<boolean>({ key: "IsWriteState", default: false });
+export const IsWriteDisableState = atom<boolean>({ key: "IsWriteDisableState", default: false });
 export const MapNavigation = () => {
   const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
   const [isWrite, setIsWrite] = useRecoilState(IsWriteState);
+  const isDisable = useRecoilValue(IsWriteDisableState);
   const router = useRouter();
   const onWrite = () => {
     setIsHide((prev) => !prev);
@@ -34,11 +36,37 @@ export const MapNavigation = () => {
           flexDirection: "column",
         }}
       >
-        <img src="/icons/map/myLetter.svg" width={40} style={{ opacity: 0.8 }} />
+        <div
+          style={{
+            position: "fixed",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "8px 16px",
+            background: "white",
+            borderRadius: 24,
+            top: isDisable ? 20 : 0,
+            opacity: isDisable ? 1 : 0,
+            transition: "opacity 0.4s, top 0.4s",
+          }}
+        >
+          <img src="/icons/map/warning_3km.svg" style={{ marginRight: 8 }} />
+          <p style={{ color: "#5e5e5e", marginTop: 2 }}>내 위치 3km 이내에만 쪽지를 놓을 수 있어요!</p>
+        </div>
+
+        <img src="/icons/map/myLetter.svg" width={40} style={{ opacity: isDisable ? 0.5 : 0.9 }} />
 
         <div style={{ marginTop: 16, height: 0, pointerEvents: "fill" }}>
           <ButtonBase
-            style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16, opacity: 0.5 }}
+            disabled={isDisable}
+            style={{
+              background: "gray",
+              padding: 8,
+              borderRadius: 8,
+              color: "white",
+              fontSize: 16,
+              opacity: isDisable ? 0.5 : 0.9,
+            }}
             onClick={() => router.push("#create")}
           >
             여기에 놓기(임시)
