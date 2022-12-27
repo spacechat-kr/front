@@ -40,10 +40,7 @@ export const MapNavigation = () => {
           <ButtonBase
             style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16 }}
             onClick={() => {
-              const name = localStorage.getItem("/cache/userDataState");
-              // 쪽지를 놓을 이름이 필요합니다.
-              if (!name) router.push("/option#name");
-              else router.push("#create");
+              router.push("#create");
             }}
           >
             여기에 놓기(임시)

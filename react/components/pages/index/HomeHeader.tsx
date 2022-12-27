@@ -91,6 +91,7 @@ export const HomeHeader = () => {
               letterSpacing: "-0.4px",
               color: name ? "#e5e5e5" : "#e5e5e567",
               padding: "4px 16px",
+              height: 50,
             }}
           >
             {name === undefined ? "" : name ? name : "Undefined"}
