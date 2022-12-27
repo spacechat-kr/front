@@ -22,6 +22,35 @@ export const MapNavigation = () => {
     <div>
       <div
         style={{
+          width: "100vw",
+          maxWidth: 900,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <ButtonBase
+          onClick={() => {}}
+          style={{
+            zIndex: 1000,
+            position: "fixed",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "8px 16px",
+            background: "white",
+            borderRadius: 24,
+            top: isDisable ? 20 : 0,
+            opacity: isDisable ? 1 : 0,
+            visibility: isDisable ? "visible" : "hidden",
+            transition: "opacity 0.4s, top 0.4s, visibility 0.4s",
+          }}
+        >
+          <img src="/icons/map/warning_3km.svg" style={{ marginRight: 8 }} />
+          <p style={{ color: "#5e5e5e", marginTop: 2 }}>내 위치 3km 이내에만 쪽지를 놓을 수 있어요!</p>
+        </ButtonBase>
+      </div>
+      <div
+        style={{
           position: "fixed",
           height: "100%",
           top: 0,
@@ -36,24 +65,6 @@ export const MapNavigation = () => {
           flexDirection: "column",
         }}
       >
-        <div
-          style={{
-            position: "fixed",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "8px 16px",
-            background: "white",
-            borderRadius: 24,
-            top: isDisable ? 20 : 0,
-            opacity: isDisable ? 1 : 0,
-            transition: "opacity 0.4s, top 0.4s",
-          }}
-        >
-          <img src="/icons/map/warning_3km.svg" style={{ marginRight: 8 }} />
-          <p style={{ color: "#5e5e5e", marginTop: 2 }}>내 위치 3km 이내에만 쪽지를 놓을 수 있어요!</p>
-        </div>
-
         <img src="/icons/map/myLetter.svg" width={40} style={{ opacity: isDisable ? 0.5 : 0.9 }} />
 
         <div style={{ marginTop: 16, height: 0, pointerEvents: "fill" }}>
