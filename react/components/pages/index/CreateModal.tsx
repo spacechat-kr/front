@@ -219,6 +219,7 @@ export const CreateModal = () => {
         <ButtonBase
           id="confirm"
           onClick={() => {
+            onWriteLeave();
             router.back();
             if (titleRef.current) titleRef.current.value = " ";
             if (descRef.current) descRef.current.value = " ";
