@@ -34,14 +34,12 @@ export const MapNavigation = () => {
           flexDirection: "column",
         }}
       >
-        <img src="/icons/map/myLetter.svg" width={60} />
+        <img src="/icons/map/myLetter.svg" width={40} style={{ opacity: 0.7 }} />
 
         <div style={{ marginTop: 16, height: 0, pointerEvents: "fill" }}>
           <ButtonBase
-            style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16 }}
-            onClick={() => {
-              router.push("#create");
-            }}
+            style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16, opacity: 0.7 }}
+            onClick={() => router.push("#create")}
           >
             여기에 놓기(임시)
           </ButtonBase>
