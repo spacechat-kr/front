@@ -34,11 +34,11 @@ export const MapNavigation = () => {
           flexDirection: "column",
         }}
       >
-        <img src="/icons/map/myLetter.svg" width={40} style={{ opacity: 0.7 }} />
+        <img src="/icons/map/myLetter.svg" width={40} style={{ opacity: 0.8 }} />
 
         <div style={{ marginTop: 16, height: 0, pointerEvents: "fill" }}>
           <ButtonBase
-            style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16, opacity: 0.7 }}
+            style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16, opacity: 0.5 }}
             onClick={() => router.push("#create")}
           >
             여기에 놓기(임시)
@@ -76,7 +76,8 @@ const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: ()
         <ButtonBase sx={{ borderRadius: 100 }} onClick={onWrite}>
           <img src="/icons/mapWrite4x.png" style={{ margin: "8px 8px 8px 0" }} width="87px" />
         </ButtonBase>
-        <div
+        <ButtonBase
+          onClick={onWrite}
           style={{
             width: isWrite ? 243 : 0,
             whiteSpace: "nowrap",
@@ -102,7 +103,7 @@ const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: ()
           >
             쪽지를 놓을 곳을 선택해주세요
           </p>
-        </div>
+        </ButtonBase>
       </div>
     </div>
   );
