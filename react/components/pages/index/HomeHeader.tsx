@@ -24,13 +24,14 @@ export const HomeHeader = () => {
   const isHide = useRecoilValue(IsHideHomeHeaderState);
   const headerRef = useRef<HTMLDivElement>(null);
   const userData = useRecoilValue(userDataState);
-  const [name, setName] = useState<string | null>(null);
+  const [name, setName] = useState<string | null>();
   useEffect(() => {
     const handleResize = () =>
       headerRef.current ? setHeight(Math.max(headerRef.current.clientHeight - 305.88, 0)) : null;
     window.addEventListener("resize", handleResize);
     handleResize();
-    setName(userData.name);
+    if (userData.name) setName(userData.name);
+    else setName(null);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -92,7 +93,7 @@ export const HomeHeader = () => {
               padding: "4px 16px",
             }}
           >
-            {name ? name : "Undefined"}
+            {name === undefined ? "" : name ? name : "Undefined"}
           </ButtonBase>
         </div>
         <div>
