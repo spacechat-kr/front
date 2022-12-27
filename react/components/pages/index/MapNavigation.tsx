@@ -39,7 +39,12 @@ export const MapNavigation = () => {
         <div style={{ marginTop: 16, height: 0, pointerEvents: "fill" }}>
           <ButtonBase
             style={{ background: "gray", padding: 8, borderRadius: 8, color: "white", fontSize: 16 }}
-            onClick={() => router.push("#create")}
+            onClick={() => {
+              const name = localStorage.getItem("/cache/userDataState");
+              // 쪽지를 놓을 이름이 필요합니다.
+              if (!name) router.push("/option#name");
+              else router.push("#create");
+            }}
           >
             여기에 놓기(임시)
           </ButtonBase>

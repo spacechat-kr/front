@@ -212,6 +212,7 @@ export const ExportModal = () => {
             }}
           >
             <FormControl variant="standard" sx={{ m: "8px 8px 0 8px", mt: 2 }}>
+              <b>이름 생성</b>
               <Input
                 inputRef={nameRef}
                 onFocus={(ref) => ref.target.setAttribute("maxLength", "20")}
@@ -225,7 +226,7 @@ export const ExportModal = () => {
                 }}
                 style={InputTitleStyle}
                 id="standard-adornment-weight"
-                placeholder="변경할 닉네임을 입력해주세요"
+                placeholder={`${userData.name ? "변경" : "생성"}할 닉네임을 입력해주세요`}
                 defaultValue={userData.name ? userData.name : undefined}
                 maxRows={1}
               />
@@ -237,7 +238,7 @@ export const ExportModal = () => {
                 onClick={() => {
                   if (!nameRef.current) return;
                   const name = nameRef.current.value;
-                  const isChange = confirm(`${name}로 이름을 변경하시겠습니까?`);
+                  const isChange = confirm(`${name}로 이름을 ${userData.name ? "변경" : "생성"}하시겠습니까?`);
                   if (isChange) {
                     setUserData((prev) => {
                       return { ...prev, name };
@@ -262,7 +263,7 @@ export const ExportModal = () => {
                   padding: 1,
                 }}
               >
-                이름 변경
+                이름 {userData.name ? "변경" : "생성"}
               </ButtonBase>
             </FormControl>
           </Box>
