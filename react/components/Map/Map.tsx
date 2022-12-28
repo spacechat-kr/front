@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { IsHomeHeaderState } from "../pages/index/HomeHeader";
 import { throttle } from "lodash";
 import { IsWriteDisableState, IsWriteState } from "../pages/index/MapNavigation";
@@ -108,7 +108,7 @@ const getDistance = (pos1: { lat: number; lng: number }, pos2: { lat: number; ln
     Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dlon / 2) * Math.sin(dlon / 2);
   return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 };
-
+export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 export default function Map({
   map,
   setMap,
@@ -121,6 +121,8 @@ export default function Map({
   const isWrite = useRecoilValue(IsWriteState);
   const [isDisable, setIsDisable] = useRecoilState(IsWriteDisableState);
   const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
+  const center = useRecoilValue(CenterState);
+  // const [center, setCenter] = useRecoilState(CenterState);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCwoQM-TnxyGry-EgM7dZ5Jh-ymTi1rdZU",
   });
@@ -133,7 +135,7 @@ export default function Map({
     const lng = map?.getCenter()?.lng();
     if (!lat || !lng || !isWrite) return;
 
-    const distance = getDistance(defaultCenter, { lat, lng });
+    const distance = getDistance(center, { lat, lng });
     if (distance >= 3 && !isDisable) setIsDisable(true);
     else if (distance < 3 && isDisable) setIsDisable(false);
   }, 25);
@@ -155,7 +157,7 @@ export default function Map({
             maxWidth: 900,
           }}
           zoom={7}
-          center={defaultCenter}
+          center={center}
           options={options}
           onLoad={loadHandler}
           onDragStart={() => {

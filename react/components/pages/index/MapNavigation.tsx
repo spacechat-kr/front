@@ -4,6 +4,7 @@
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
 import { atom, useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { CenterState, defaultCenter } from "../../Map/Map";
 import { IsHideHomeHeaderState } from "./HomeHeader";
 
 // React-google map current location
@@ -11,6 +12,7 @@ export const IsWriteState = atom<boolean>({ key: "IsWriteState", default: false 
 export const IsWriteDisableState = atom<boolean>({ key: "IsWriteDisableState", default: false });
 export const MapNavigation = () => {
   const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
+  const setCenter = useSetRecoilState(CenterState);
   const [isWrite, setIsWrite] = useRecoilState(IsWriteState);
   const [isDisable, setIsDisable] = useRecoilState(IsWriteDisableState);
   const router = useRouter();
@@ -30,7 +32,11 @@ export const MapNavigation = () => {
         }}
       >
         <ButtonBase
-          onClick={() => {}}
+          onClick={() =>
+            setCenter((prev) => {
+              return { lat: prev.lat + 0.0000001, lng: prev.lng + 0.0000001 };
+            })
+          }
           style={{
             zIndex: 1000,
             position: "fixed",
