@@ -12,11 +12,12 @@ export const IsWriteDisableState = atom<boolean>({ key: "IsWriteDisableState", d
 export const MapNavigation = () => {
   const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
   const [isWrite, setIsWrite] = useRecoilState(IsWriteState);
-  const isDisable = useRecoilValue(IsWriteDisableState);
+  const [isDisable, setIsDisable] = useRecoilState(IsWriteDisableState);
   const router = useRouter();
   const onWrite = () => {
     setIsHide((prev) => !prev);
     setIsWrite((prev) => !prev);
+    if (isDisable) setIsDisable(false);
   };
   return (
     <div>

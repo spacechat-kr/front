@@ -4,6 +4,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { IsHomeHeaderState } from "../pages/index/HomeHeader";
 import { throttle } from "lodash";
 import { IsWriteDisableState, IsWriteState } from "../pages/index/MapNavigation";
+import { useEffect } from "react";
 export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 
 const style = [
@@ -124,6 +125,9 @@ export default function Map({
     googleMapsApiKey: "AIzaSyCwoQM-TnxyGry-EgM7dZ5Jh-ymTi1rdZU",
   });
 
+  useEffect(() => {
+    onMove();
+  }, [isWrite]);
   const onMove = throttle(() => {
     const lat = map?.getCenter()?.lat();
     const lng = map?.getCenter()?.lng();
