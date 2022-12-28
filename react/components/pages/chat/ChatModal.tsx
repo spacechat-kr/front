@@ -107,9 +107,21 @@ export const ChatModal = () => {
             background: "linear-gradient(90deg, #EB2929 4.55%, #E65656 90.68%)",
             marginTop: 2,
             color: "white",
+            fontFamily: "AppleSDGothicNeo",
+            fontWeight: 500,
+            fontSize: 14,
+            lineHeight: "28px",
+            textAlign: "center",
+            letterSpacing: "-0.4px",
           },
           "#cancel": {
             marginTop: 1,
+            fontFamily: "AppleSDGothicNeo",
+            fontWeight: 500,
+            fontSize: 14,
+            lineHeight: "28px",
+            textAlign: "center",
+            letterSpacing: "-0.4px",
           },
         }}
       >
