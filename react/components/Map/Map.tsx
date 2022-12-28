@@ -145,6 +145,18 @@ export default function Map({
       <Box
         sx={{
           "*": { outline: "none !important" },
+          "img[alt=Google],div.gmnoprint": {
+            display: "none",
+          },
+          "button.gm-style-cc": {
+            display: "flex",
+            width: "100vw",
+            maxWidth: 900,
+            justifyContent: "center",
+            // position: "fixed",
+            // bottom: 16,
+            // height: 16,
+          },
         }}
       >
         <GoogleMap
