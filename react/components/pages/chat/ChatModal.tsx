@@ -1,60 +1,76 @@
 import { Box, ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { userDataState } from "../index/HomeHeader";
 
-const ModalList = {
-  alram: {
-    imgSrc: "/icons/modalAlert.svg",
-    cancelText: "알림 끄기",
-    content: () => (
-      <>
-        알람을 끄면
-        <br />
-        채팅이 와도 울리지 않아요.
-        <br />
-        <span>정말 알림을 끌까요?</span>
-      </>
-    ),
-  },
-  out: {
-    imgSrc: "/icons/modalAlert.svg",
-    cancelText: "채팅방 나가기",
-    content: () => (
-      <>
-        채팅방을 나가면
-        <br />
-        기록이 모두 사라져요.
-        <br />
-        <span>정말 채팅방을 나갈까요?</span>
-      </>
-    ),
-  },
-  report: {
-    imgSrc: "/icons/modalMail.svg",
-    cancelText: "메일로 상대방 신고하기",
-    content: () => (
-      <>
-        상대방이 불쾌한 행동을 하나요?
-        <br />
-        메일로 신고내용을 보내주세요.
-      </>
-    ),
-  },
-  none: {
-    cancelText: "",
-    content: () => <div></div>,
-  },
-};
 let remainType = "none";
 export const ChatModal = () => {
   const router = useRouter();
   const [type, setType] = useState<"alram" | "out" | "report" | "none">("none");
+  const userData = useRecoilValue(userDataState);
 
   useEffect(() => {
     if (!router.asPath.includes("#") && ["alram", "out", "report", "none"].includes(type)) remainType = type;
     const aftertype = router.asPath.split("#")[1] as any;
     setType(aftertype ? aftertype : "none");
   }, [router]);
+
+  const ModalList = {
+    alram: {
+      imgSrc: "/icons/modalAlert.svg",
+      cancelText: "알림 끄기",
+      onClickConfirm: () => {},
+      content: () => (
+        <>
+          알람을 끄면
+          <br />
+          채팅이 와도 울리지 않아요.
+          <br />
+          <span>정말 알림을 끌까요?</span>
+        </>
+      ),
+    },
+    out: {
+      imgSrc: "/icons/modalAlert.svg",
+      cancelText: "채팅방 나가기",
+      onClickConfirm: () => router.push("/list/chat"),
+      content: () => (
+        <>
+          채팅방을 나가면
+          <br />
+          기록이 모두 사라져요.
+          <br />
+          <span>정말 채팅방을 나갈까요?</span>
+        </>
+      ),
+    },
+    report: {
+      imgSrc: "/icons/modalMail.svg",
+      cancelText: "메일로 상대방 신고하기",
+      onClickConfirm: () => {
+        router.back();
+        window.open(
+          `mailto:cs@spacechat.kr?subject=[Space-Chat CS-report]: (Write your user-report title here.)&body=::DeviceId:: ${userData.uuid}%0D
+::UserName:: ${userData.name}%0D
+::TargetName:: (Please enter person-name to report)%0D
+%0D
+::Content::%0D(Write your report content here.)`
+        );
+      },
+      content: () => (
+        <>
+          상대방이 불쾌한 행동을 하나요?
+          <br />
+          메일로 신고내용을 보내주세요.
+        </>
+      ),
+    },
+    none: {
+      cancelText: "",
+      content: () => <div></div>,
+    },
+  };
 
   return (
     <>
@@ -133,7 +149,7 @@ export const ChatModal = () => {
           />
         </div>
         {ModalList[type != "none" ? type : remainType].content()}
-        <ButtonBase id="confirm" onClick={() => router.back()}>
+        <ButtonBase id="confirm" onClick={ModalList[type != "none" ? type : remainType].onClickConfirm}>
           {ModalList[type != "none" ? type : remainType].cancelText}
         </ButtonBase>
         <ButtonBase id="cancel" onClick={() => router.back()}>

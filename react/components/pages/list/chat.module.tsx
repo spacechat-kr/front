@@ -86,7 +86,7 @@ export const ChatCard = ({
     </ButtonBase>
   );
 };
-export const BackHeader = () => {
+export const BackHeader = ({ onBackRouter }: { onBackRouter?: string }) => {
   const router = useRouter();
   return (
     <div
@@ -104,7 +104,10 @@ export const BackHeader = () => {
       }}
     >
       <ButtonBase sx={{ ml: 2, borderRadius: 4, padding: 1 }}>
-        <ArrowBackIosNewRounded style={{ fontSize: 28, color: "#212121" }} onClick={router.back} />
+        <ArrowBackIosNewRounded
+          style={{ fontSize: 28, color: "#212121" }}
+          onClick={onBackRouter ? () => router.push(onBackRouter) : router.back}
+        />
       </ButtonBase>
     </div>
   );

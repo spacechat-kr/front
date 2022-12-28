@@ -31,7 +31,7 @@ export default function Page() {
   return (
     <>
       <Container maxWidth="md" style={{ padding: 0 }}>
-        <BackHeader />
+        <BackHeader onBackRouter="/" />
         <div style={{ background: "white", height: "calc(100vh)", paddingTop: 60 }}>
           {ExampleChatList.length === 0 ? (
             <NoChatList />
