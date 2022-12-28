@@ -51,6 +51,7 @@ export const HomeHeader = () => {
         maxWidth: 900,
         overflow: "hidden",
         top: isOpen ? -height : -height - 200,
+        maxHeight: 1000,
         visibility: isHide ? "hidden" : "visible",
         transition: "opacity 0.3s, top 0.2s, visibility 0.3s",
         opacity: height === 1000 || isHide ? 0 : 1,

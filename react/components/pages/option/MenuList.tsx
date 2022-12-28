@@ -1,8 +1,11 @@
 import { ArrowForwardIosRounded } from "@mui/icons-material";
 import { ButtonBase } from "@mui/material";
 import { Box } from "@mui/system";
+import { useRecoilValue } from "recoil";
+import { userDataState } from "../index/HomeHeader";
 
 export const MenuList = () => {
+  const userData = useRecoilValue(userDataState);
   return (
     <div style={{ display: "flex", justifyContent: "center", marginTop: 64 }}>
       <div style={{ maxWidth: 560, width: "60vw" }}>
@@ -32,7 +35,10 @@ export const MenuList = () => {
             className="button"
             onClick={() =>
               window.open(
-                `mailto:cs@spacechat.kr?subject=[Space-Chat 문의]: (제목)&body=본인의 이름과 스크린샷을 첨부해주세요. (추가 내용)`
+                `mailto:cs@spacechat.kr?subject=[Space-Chat CS]: (Write your question title here.)&body=::DeviceId:: ${userData.uuid}%0D
+::UserName:: ${userData.name}%0D
+%0D
+::Content::%0D(Write your question here.)`
               )
             }
           >
