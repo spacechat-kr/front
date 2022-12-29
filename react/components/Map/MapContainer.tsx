@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
+
 import { useRouter } from "next/router";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
@@ -31,10 +32,11 @@ const locationList = Array.from({ length: 5000 }).map((i) => {
  * @example_site https://codesandbox.io/s/relaxed-proskuriakova-mi31c?file=/src/App.js:194-210
  */
 export default function MapContainer() {
+  const router = useRouter();
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markerList, setMarkerList] = useState<{ lat: number; lng: number }[]>(locationList);
   const isWrite = useRecoilValue(IsWriteState);
-  const router = useRouter();
+  const clusterRef = useRef<any>(null);
 
   useEffect(() => {
     /** 마커 모두 보이는곳으로 이동, 추후 3km 반경보는곳으로 이동하는것도 가능 */
@@ -51,6 +53,35 @@ export default function MapContainer() {
     mapFitBounds();
   }, [map]);
 
+  const clusterStyle = useMemo(
+    () => [
+      {
+        url: isWrite ? "/icons/map/lv2_transparent.svg" : "/icons/map/lv2.svg",
+        width: 25,
+        height: 25,
+        backgroundPosition: `top ${-25 + 18}px`,
+      },
+      {
+        url: isWrite ? "/icons/map/lv3_transparent.svg" : "/icons/map/lv3.svg",
+        width: 30,
+        height: 30,
+        backgroundPosition: `top ${-30 + 18}px`,
+      },
+      {
+        url: isWrite ? "/icons/map/lv4_transparent.svg" : "/icons/map/lv4.svg",
+        width: 40,
+        height: 40,
+        backgroundPosition: `top ${-40 + 25}px`,
+      },
+    ],
+    [isWrite]
+  );
+  useEffect(() => {
+    if (clusterRef.current) {
+      clusterRef.current.setStyles(clusterStyle);
+      clusterRef.current.repaint();
+    }
+  }, [isWrite]);
   const place = {
     id: 1,
     position: defaultCenter,
@@ -85,60 +116,15 @@ export default function MapContainer() {
         <MarkerClusterer>
           {(clusterer) =>
             markerList.map((loc, id) => {
-              clusterer.setStyles([
-                {
-                  url: "/icons/map/lv2.svg",
-                  width: 25,
-                  height: 25,
-                  backgroundPosition: `top ${-25 + 18}px`,
-                },
-                {
-                  url: "/icons/map/lv3.svg",
-                  width: 30,
-                  height: 30,
-                  backgroundPosition: `top ${-30 + 18}px`,
-                },
-                {
-                  url: "/icons/map/lv4.svg",
-                  width: 40,
-                  height: 40,
-                  backgroundPosition: `top ${-40 + 25}px`,
-                },
-              ]);
+              clusterRef.current = clusterer;
+              clusterer.setStyles(clusterStyle);
+
               return (
-                <CustomMarker
-                  key={id}
-                  position={loc}
-                  clusterer={clusterer}
-                  onClick={onClickMarker}
-                  // styles: [
-                  //   {
-                  //     fontFamily: "asd",
-                  //     url:"",
-                  //     height:10,
-                  //     width:10,
-                  //     //         url: string;
-                  //     // className?: string;
-                  //     // height: number;
-                  //     // width: number;
-                  //     // anchorText?: number[];
-                  //     // anchorIcon?: number[];
-                  //     // textColor?: string;
-                  //     // textSize?: number;
-                  //     // textDecoration?: string;
-                  //     // fontWeight?: string;
-                  //     // fontStyle?: string;
-                  //     // fontFamily?: string;
-                  //     // backgroundPosition?: string;
-                  //   },
-                  // ],
-                  // }}
-                />
+                <CustomMarker key={id} position={loc} clusterer={clusterer} onClick={onClickMarker} disable={isWrite} />
               );
             })
           }
         </MarkerClusterer>
-
         <Circle
           // draggable?: boolean | undefined;
           // editable?: boolean | undefined;
