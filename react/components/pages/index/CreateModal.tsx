@@ -1,4 +1,4 @@
-import { Box, ButtonBase, FormControl, FormHelperText, Input } from "@mui/material";
+import { Box, ButtonBase, FormControl, FormHelperText, Input, TextareaAutosize } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -87,7 +87,7 @@ export const CreateModal = () => {
               </FormHelperText>
             </FormControl>
             <FormControl variant="standard" sx={{ m: "0 0" }}>
-              <textarea
+              <TextareaAutosize
                 style={InputDescStyle}
                 ref={descRef}
                 maxLength={200}
@@ -262,5 +262,7 @@ const InputDescStyle = {
   paddingLeft: 10,
   paddingRight: 10,
   borderRadius: 2,
-  height: "2.5em",
+  minHeight: "10vh",
+  maxHeight: "40vh",
+  overflow: "scroll",
 };
