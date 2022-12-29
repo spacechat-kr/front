@@ -5,111 +5,6 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IsHideHomeHeaderState, userDataState } from "./HomeHeader";
 import { IsWriteState } from "./MapNavigation";
 
-const ModalList = {
-  create: {
-    imgSrc: "/icons/modalCreate.png",
-    confirmText: "여기에 쪽지 놓기",
-    cancelText: "다른 곳에 쪽지 놓기",
-    content: (titleRef, descRef) => {
-      return (
-        <Box
-          sx={{
-            boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.25)",
-            borderRadius: "19px",
-            padding: "8px 16px",
-            overflow: "hidden",
-            "input::placeholder": {
-              fontSize: 16.4,
-            },
-            width: 300,
-            display: "flex",
-            flexDirection: "column",
-            "textarea:focus": {
-              // outline: "none",
-              outline: "#00000039 0.5px solid !important",
-            },
-          }}
-        >
-          <FormControl variant="standard" sx={{ m: "8px 8px 0 8px", mt: 2 }}>
-            <Input
-              inputRef={titleRef}
-              onFocus={(ref) => ref.target.setAttribute("maxLength", "16")}
-              onChange={(r) => {
-                const len = document.getElementById("titleLength");
-                if (len) {
-                  len.innerText = `${r.target.value.length}/16`;
-                  if (r.target.value.length === 0 || r.target.value.length > 16) len.style.color = "red";
-                  else len.style.color = "#00000099";
-                }
-              }}
-              style={InputTitleStyle}
-              id="standard-adornment-weight"
-              placeholder="머릿말을 입력해주세요(필수)"
-              maxRows={1}
-            />
-            <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
-              <div> </div>
-              <div id="titleLength">0/16</div>
-            </FormHelperText>
-          </FormControl>
-          <FormControl variant="standard" sx={{ m: "0 0" }}>
-            <textarea
-              style={InputDescStyle}
-              ref={descRef}
-              maxLength={200}
-              placeholder={"쪽지내용을 입력해주세요(선택)"}
-              onChange={(r) => {
-                const len = document.getElementById("descLength");
-                if (len) {
-                  len.innerText = `${r.target.value.length}/200`;
-                  if (r.target.value.length > 200) len.style.color = "red";
-                  else len.style.color = "#00000099";
-                }
-              }}
-            />
-            <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
-              <div> </div>
-              <div id="descLength">0/200</div>
-            </FormHelperText>
-          </FormControl>
-        </Box>
-      );
-    },
-  },
-  enter: {
-    imgSrc: "/icons/modalCreate.png",
-    confirmText: "참여하기",
-    cancelText: "취소",
-    content: () => (
-      <>
-        채팅방뫄뫄
-        <br />
-        제발들어와주세요... <br />
-        제발들어와주세요... <br />
-        제발들어와주세요...
-      </>
-    ),
-  },
-  out: {
-    imgSrc: "/icons/modalAlert.svg",
-    confirmText: "확인",
-    content: () => (
-      <>
-        내 위치 3km 이내에만
-        <br />
-        쪽지를 놓을 수 있어요!
-      </>
-    ),
-  },
-  write: {
-    cancelText: "",
-    content: () => <div></div>,
-  },
-  none: {
-    cancelText: "",
-    content: () => null,
-  },
-};
 let remainType = "none";
 export const CreateModal = () => {
   const router = useRouter();
@@ -142,6 +37,114 @@ export const CreateModal = () => {
 
   const modalType = type != "none" ? type : remainType;
   if (modalType === "write") return <></>;
+
+  const ModalList = {
+    create: {
+      imgSrc: "/icons/modalCreate.png",
+      confirmText: "여기에 쪽지 놓기",
+      cancelText: "다른 곳에 쪽지 놓기",
+      content: (titleRef, descRef) => {
+        return (
+          <Box
+            sx={{
+              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.25)",
+              borderRadius: "19px",
+              padding: "8px 16px",
+              overflow: "hidden",
+              "input::placeholder": {
+                fontSize: 16.4,
+              },
+              width: 300,
+              display: "flex",
+              flexDirection: "column",
+              "textarea:focus": {
+                // outline: "none",
+                outline: "#00000039 0.5px solid !important",
+              },
+            }}
+          >
+            <FormControl variant="standard" sx={{ m: "8px 8px 0 8px", mt: 2 }}>
+              <Input
+                inputRef={titleRef}
+                onFocus={(ref) => ref.target.setAttribute("maxLength", "20")}
+                defaultValue={userData.name ? `${userData.name}님의 채팅방` : ""}
+                onLoadedData={(r) => console.log(r)}
+                onChange={(r) => {
+                  const len = document.getElementById("titleLength");
+                  if (len) {
+                    len.innerText = `${r.target.value.length}/20`;
+                    if (r.target.value.length === 0 || r.target.value.length > 20) len.style.color = "red";
+                    else len.style.color = "#00000099";
+                  }
+                }}
+                style={InputTitleStyle}
+                placeholder="머릿말을 입력해주세요(필수)"
+                maxRows={1}
+              />
+              <FormHelperText component={"div"} style={{ display: "flex", justifyContent: "space-between" }}>
+                <div> </div>
+                <div id="titleLength">{userData.name ? `${userData.name.slice(0, 14)}님의 쪽지`.length : 0}/20</div>
+              </FormHelperText>
+            </FormControl>
+            <FormControl variant="standard" sx={{ m: "0 0" }}>
+              <textarea
+                style={InputDescStyle}
+                ref={descRef}
+                maxLength={200}
+                placeholder={"쪽지내용을 입력해주세요(선택)"}
+                onChange={(r) => {
+                  const len = document.getElementById("descLength");
+                  if (len) {
+                    len.innerText = `${r.target.value.length}/200`;
+                    if (r.target.value.length > 200) len.style.color = "red";
+                    else len.style.color = "#00000099";
+                  }
+                }}
+              />
+              <FormHelperText component={"div"} style={{ display: "flex", justifyContent: "space-between" }}>
+                <div> </div>
+                <div id="descLength">0/200</div>
+              </FormHelperText>
+            </FormControl>
+          </Box>
+        );
+      },
+    },
+    enter: {
+      imgSrc: "/icons/modalCreate.png",
+      confirmText: "참여하기",
+      cancelText: "취소",
+      content: () => (
+        <>
+          채팅방뫄뫄
+          <br />
+          제발들어와주세요... <br />
+          제발들어와주세요... <br />
+          제발들어와주세요...
+        </>
+      ),
+    },
+    out: {
+      imgSrc: "/icons/modalAlert.svg",
+      confirmText: "확인",
+      content: () => (
+        <>
+          내 위치 3km 이내에만
+          <br />
+          쪽지를 놓을 수 있어요!
+        </>
+      ),
+    },
+    write: {
+      cancelText: "",
+      content: () => <div></div>,
+    },
+    none: {
+      cancelText: "",
+      content: () => null,
+    },
+  };
+
   return (
     <>
       <div
@@ -238,12 +241,16 @@ export const CreateModal = () => {
 export const InputTitleStyle = {
   fontFamily: "AppleSDGothicNeo",
   fontWeight: 400,
-  fontSize: 20,
-  lineHeight: "41px",
+  fontSize: 15,
+  lineHeight: "22px",
   letterSpacing: "-0.4px",
   border: "none",
   padding: "0",
   outline: "none",
+  ":placeholder": {
+    fontWeight: 700,
+    fontSize: 25,
+  },
 };
 const InputDescStyle = {
   fontFamily: "AppleSDGothicNeo",
