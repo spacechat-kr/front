@@ -39,6 +39,13 @@ export default function MapContainer() {
   const clusterRef = useRef<any>(null);
 
   useEffect(() => {
+    document.body.style.overscrollBehavior = "contain";
+    return () => {
+      document.body.style.overscrollBehavior = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
     /** 마커 모두 보이는곳으로 이동, 추후 3km 반경보는곳으로 이동하는것도 가능 */
     const mapFitBounds = () => {
       // console.log("mapFitBounds:map> ", map);
