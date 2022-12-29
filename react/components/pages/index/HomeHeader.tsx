@@ -34,9 +34,9 @@ export const HomeHeader = () => {
     else setName(null);
     return () => window.removeEventListener("resize", handleResize);
   }, [router]);
-  useEffect(() => {
-    if (isOpen) setIsOpen(false);
-  }, [router]);
+  // useEffect(() => {
+  //   if (isOpen) setIsOpen(false);
+  // }, [router]);
 
   const onClickChat = () => router.push("/list/chat");
   const onClickSetting = () => router.push("/option");
