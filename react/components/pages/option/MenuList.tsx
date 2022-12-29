@@ -33,14 +33,11 @@ export const MenuList = () => {
           </ButtonBase>
           <ButtonBase
             className="button"
-            onClick={() =>
-              window.open(
-                `mailto:cs@spacechat.kr?subject=[Space-Chat CS]: (Write your question title here.)&body=::DeviceId:: ${userData.uuid}%0D
-::UserName:: ${userData.name}%0D
-%0D
-::Content::%0D(Write your question here.)`
-              )
-            }
+            onClick={() => {
+              const title = `[Space-Chat CS-Questions]: (Write your user-report title here.)`;
+              const body = `:: DeviceId :: ${userData.uuid}%0D%0A:: UserName :: ${userData.name} %0D%0A%0D%0A:: Content ::%0D%0A (Write your report content here.)`;
+              window.open(`mailto:cs@spacechat.kr?subject=${title}&body=${body}`);
+            }}
           >
             <p className="button">문의하기</p>
             <ArrowForwardIosRounded style={{ marginBottom: 2.3 }} />

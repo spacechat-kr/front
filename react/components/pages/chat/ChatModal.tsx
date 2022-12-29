@@ -50,13 +50,9 @@ export const ChatModal = () => {
       cancelText: "메일로 상대방 신고하기",
       onClickConfirm: () => {
         router.back();
-        window.open(
-          `mailto:cs@spacechat.kr?subject=[Space-Chat CS-report]: (Write your user-report title here.)&body=::DeviceId:: ${userData.uuid}%0D
-::UserName:: ${userData.name}%0D
-::TargetName:: (Please enter person-name to report)%0D
-%0D
-::Content::%0D(Write your report content here.)`
-        );
+        const title = `[Space-Chat CS-Chat-Report]: (Write your user-report title here.)`;
+        const body = `:: DeviceId :: ${userData.uuid}%0D%0A:: UserName :: ${userData.name} %0D%0A:: TargetName::(Please enter person-name to report) %0D%0A%0D%0A:: Content ::%0D%0A (Write your report content here.)`;
+        window.open(`mailto:cs@spacechat.kr?subject=${title}&body=${body}`);
       },
       content: () => (
         <>
