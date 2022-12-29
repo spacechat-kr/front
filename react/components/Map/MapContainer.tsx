@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
@@ -62,7 +62,9 @@ export default function MapContainer() {
       fillOpacity: 0.35,
     },
   };
-  const onClickMarker = () => router.push("#enter");
+  const onClickMarker = useCallback(() => {
+    if (!isWrite) router.push("#enter");
+  }, [isWrite]);
   return (
     <Box
       sx={{
