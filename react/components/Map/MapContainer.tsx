@@ -110,6 +110,24 @@ export default function MapContainer() {
           position: "relative",
           left: "-1px !important",
         },
+        "button.gm-ui-hover-effect": {
+          right: "0px !important",
+          top: "0px !important",
+        },
+        "div.transit-title": {
+          fontFamily: "AppleSDGothicNeo !important",
+          fontWeight: 700,
+        },
+        "div.title": {
+          fontFamily: "AppleSDGothicNeo !important",
+          fontWeight: 700,
+        },
+        "div.address-line": {
+          fontFamily: "AppleSDGothicNeo !important",
+        },
+        "div.view-link": {
+          display: "none",
+        },
       }}
     >
       <Map setMap={setMap} map={map}>
