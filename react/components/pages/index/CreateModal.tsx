@@ -222,10 +222,12 @@ export const CreateModal = () => {
         <ButtonBase
           id="confirm"
           onClick={() => {
+            setTimeout(() => {
+              if (titleRef.current) titleRef.current.value = titleRef.current.defaultValue;
+              if (descRef.current) descRef.current.value = descRef.current.defaultValue;
+            }, 1000);
             onWriteLeave();
             router.back();
-            if (titleRef.current) titleRef.current.value = " ";
-            if (descRef.current) descRef.current.value = " ";
           }}
         >
           {ModalList[modalType].confirmText}
