@@ -68,7 +68,8 @@ export const MapNavigation = () => {
           alignItems: "center",
           pointerEvents: "none",
           opacity: isWrite ? 1 : 0,
-          transition: "opacity 0.1s",
+          visibility: isWrite ? "visible" : "hidden",
+          transition: "opacity 0.1s, visibility 0.1s",
           flexDirection: "column",
         }}
       >
