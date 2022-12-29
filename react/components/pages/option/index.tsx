@@ -212,7 +212,7 @@ export const ExportModal = () => {
             }}
           >
             <FormControl variant="standard" sx={{ m: "8px 8px 0 8px", mt: 2 }}>
-              <b>이름 생성</b>
+              <b>이름 {userData.name ? "변경" : "생성"}</b>
               <Input
                 inputRef={nameRef}
                 onFocus={(ref) => ref.target.setAttribute("maxLength", "20")}
@@ -232,7 +232,7 @@ export const ExportModal = () => {
               />
               <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
                 <div> </div>
-                <div id="titleLength">0/14</div>
+                <div id="titleLength">{userData.name ? userData.name.length : 0}/20</div>
               </FormHelperText>
               <ButtonBase
                 onClick={() => {

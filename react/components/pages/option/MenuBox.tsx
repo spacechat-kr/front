@@ -2,6 +2,8 @@ import { ButtonBase } from "@mui/material";
 import { Box } from "@mui/system";
 import { useRouter } from "next/router";
 import { ChangeEventHandler, useRef } from "react";
+import { useRecoilValue } from "recoil";
+import { userDataState } from "../index/HomeHeader";
 
 const processFile = (file) => {
   var reader = new FileReader();
@@ -14,6 +16,7 @@ const processFile = (file) => {
 export const MenuBox = () => {
   const router = useRouter();
   const ImportInputRef = useRef<HTMLInputElement>(null);
+  const userData = useRecoilValue(userDataState);
   const onClickImport: ChangeEventHandler<HTMLInputElement> = (e) => {
     // 파일 이름 체크
     if (!e.target.value.includes("spacechat_")) return alert("잘못된 파일입니다. 불러올 수 없습니다.");
@@ -57,7 +60,7 @@ export const MenuBox = () => {
             onClick={() => router.push("#name")}
           >
             <img src="/icons/option/changeNickname.svg" />
-            <p className="txt">이름수정</p>
+            <p className="txt">이름{userData.name ? "변경" : "생성"}</p>
           </ButtonBase>
           <ButtonBase
             style={{ borderRadius: 8, padding: 4, margin: 4, flexDirection: "column", flex: 1 }}
