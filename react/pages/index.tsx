@@ -19,26 +19,3 @@ export default function Page() {
     </>
   );
 }
-
-export const InputTitleStyle = {
-  fontFamily: "AppleSDGothicNeo",
-  fontWeight: 400,
-  fontSize: 20,
-  lineHeight: "41px",
-  letterSpacing: "-0.4px",
-  border: "none",
-  padding: "0",
-  outline: "none",
-};
-export const InputDescStyle = {
-  fontFamily: "AppleSDGothicNeo",
-  fontWeight: 400,
-  fontSize: 15,
-  lineHeight: "22px",
-  letterSpacing: "-0.4px",
-  border: "none",
-  paddingLeft: 10,
-  paddingRight: 10,
-  borderRadius: 2,
-  height: "2.5em",
-};

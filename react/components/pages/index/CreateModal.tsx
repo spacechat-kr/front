@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { IsHideHomeHeaderState, userDataState } from "./HomeHeader";
 import { IsWriteState } from "./MapNavigation";
-import { InputTitleStyle, InputDescStyle } from "../../../pages/index";
 
 const ModalList = {
   create: {
@@ -34,30 +33,31 @@ const ModalList = {
           <FormControl variant="standard" sx={{ m: "8px 8px 0 8px", mt: 2 }}>
             <Input
               inputRef={titleRef}
-              onFocus={(ref) => ref.target.setAttribute("maxLength", "13")}
+              onFocus={(ref) => ref.target.setAttribute("maxLength", "16")}
               onChange={(r) => {
                 const len = document.getElementById("titleLength");
                 if (len) {
-                  len.innerText = `${r.target.value.length}/13`;
-                  if (r.target.value.length === 0 || r.target.value.length > 13) len.style.color = "red";
+                  len.innerText = `${r.target.value.length}/16`;
+                  if (r.target.value.length === 0 || r.target.value.length > 16) len.style.color = "red";
                   else len.style.color = "#00000099";
                 }
               }}
               style={InputTitleStyle}
               id="standard-adornment-weight"
-              placeholder="머릿말을 입력해주세요"
+              placeholder="머릿말을 입력해주세요(필수)"
               maxRows={1}
             />
             <FormHelperText style={{ display: "flex", justifyContent: "space-between" }}>
               <div> </div>
-              <div id="titleLength">0/14</div>
+              <div id="titleLength">0/16</div>
             </FormHelperText>
           </FormControl>
-          <FormControl variant="standard" sx={{ m: "0 8px" }}>
+          <FormControl variant="standard" sx={{ m: "0 0" }}>
             <textarea
               style={InputDescStyle}
               ref={descRef}
               maxLength={200}
+              placeholder={"쪽지내용을 입력해주세요(선택)"}
               onChange={(r) => {
                 const len = document.getElementById("descLength");
                 if (len) {
@@ -233,4 +233,27 @@ export const CreateModal = () => {
       </Box>
     </>
   );
+};
+
+export const InputTitleStyle = {
+  fontFamily: "AppleSDGothicNeo",
+  fontWeight: 400,
+  fontSize: 20,
+  lineHeight: "41px",
+  letterSpacing: "-0.4px",
+  border: "none",
+  padding: "0",
+  outline: "none",
+};
+const InputDescStyle = {
+  fontFamily: "AppleSDGothicNeo",
+  fontWeight: 400,
+  fontSize: 15,
+  lineHeight: "22px",
+  letterSpacing: "-0.4px",
+  border: "none",
+  paddingLeft: 10,
+  paddingRight: 10,
+  borderRadius: 2,
+  height: "2.5em",
 };
