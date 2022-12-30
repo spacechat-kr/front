@@ -118,6 +118,7 @@ const BottomWriteButton = ({ isWrite, onWrite }: { isWrite: boolean; onWrite: ()
           right: isWrite ? "50%" : "4%",
           transform: `translateX(${isWrite ? "50%" : "0"})`,
           transition: "right 0.4s, transform 0.4s",
+          willChange: "right, transform",
         }}
       >
         <ButtonBase sx={{ borderRadius: 100 }} onClick={onWrite}>
