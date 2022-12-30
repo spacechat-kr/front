@@ -1,9 +1,11 @@
 import { Add } from "@mui/icons-material";
 import { Box, ButtonBase, TextareaAutosize } from "@mui/material";
 import dayjs from "dayjs";
+import { useRouter } from "next/router";
 import { useState, useRef } from "react";
 import { atom, useRecoilState, useSetRecoilState } from "recoil";
 import { ChatListState, myTestDeviceId } from "./ChatList";
+import { ws } from "./SocketListner";
 
 const FileInputState = atom<boolean>({ key: "FileInputState", default: false });
 export const FileInputBox = () => {
@@ -89,12 +91,11 @@ const FileInputIcon = () => {
 };
 
 export const InputBox = () => {
-  const setChatList = useSetRecoilState(ChatListState);
+  const router = useRouter();
   const [value, setValue] = useState("");
+  const setChatList = useSetRecoilState(ChatListState);
   const TextareaRef = useRef<HTMLTextAreaElement>(null);
   const onClickSend = () => {
-    setValue("");
-    if (TextareaRef.current) TextareaRef.current.value = "";
     setChatList((prev) => {
       return [
         ...prev,
@@ -106,6 +107,15 @@ export const InputBox = () => {
         },
       ];
     });
+    if (ws)
+      ws.send(
+        JSON.stringify({
+          roomId: router.query.id,
+          message: value,
+        })
+      );
+    setValue("");
+    if (TextareaRef.current) TextareaRef.current.value = "";
     const chatListDiv = document.getElementById("chatList");
     if (chatListDiv) {
       setTimeout(() => {

@@ -232,63 +232,63 @@ export default function Document() {
         {/* 폰트 프리로드 */}
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoH.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoH.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoEB.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoEB.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoB.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoB.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoSB.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoSB.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoM.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoM.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoR.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoR.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoL.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoL.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoUL.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoUL.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="styles/font/woff2/AppleSDGothicNeoT.woff2"
+          href="/styles/font/woff2/AppleSDGothicNeoT.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
