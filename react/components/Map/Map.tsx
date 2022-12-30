@@ -7,6 +7,8 @@ import { IsWriteDisableState, IsWriteState } from "../pages/index/MapNavigation"
 import { useEffect } from "react";
 import { getDistance } from "./getDistance";
 import { ax } from "../../pages/_app";
+import { markerListState } from "./MapContainer";
+import _ from "lodash";
 export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 
@@ -118,6 +120,7 @@ export default function Map({
   const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
   const center = useRecoilValue(CenterState);
   const userData = useRecoilValue(userDataState);
+  const [markerList, setMarkerList] = useRecoilState(markerListState);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCwoQM-TnxyGry-EgM7dZ5Jh-ymTi1rdZU",
   });
@@ -151,8 +154,16 @@ export default function Map({
       startLatitude: minLat,
       startLongitude: minLng,
       userId: userData.uuid,
-    });
-  }, 1000);
+    })
+      .then(({ data }) => {
+        if (data.code === "200") {
+          if (!data.data || !data.data.length) return;
+          const diffList = _.differenceBy(data.data, markerList, "postId");
+          if (diffList.length > 0) setMarkerList((prev) => [...prev, ...diffList]);
+        } else throw Error;
+      })
+      .catch((e) => console.error("쪽지리스트 갱신 중 오류가 발생했습니다."));
+  }, 1300);
   const onMove = () => {
     CheckDistacneLimit();
     getMarkerListByCenter();
@@ -185,7 +196,7 @@ export default function Map({
             maxWidth: 900,
           }}
           zoom={7}
-          center={center}
+          center={defaultCenter}
           options={options}
           onLoad={loadHandler}
           onDragStart={() => {

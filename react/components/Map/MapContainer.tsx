@@ -1,57 +1,31 @@
 import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
-
 import { useRouter } from "next/router";
-import { useEffect, useState, useCallback, useRef, useMemo } from "react";
-import { useRecoilValue } from "recoil";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { atom, useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
 import Map, { defaultCenter } from "./Map";
-
-/**
- * 임시 테스트용 마커 리스트
- */
-const locationList = Array.from({ length: 5000 }).map((i) => {
-  const center = defaultCenter;
-  const lat = Math.floor(Math.random() * 1000 - 500) / 5000 + center.lat;
-  const lng = Math.floor(Math.random() * 1000 - 500) / 5000 + center.lng;
-  const { maxLat, minLat, maxLng, minLng } = {
-    maxLat: center.lat + 0.009094341036469854 * 3,
-    minLat: center.lat - 0.009094341036469854 * 3,
-    maxLng: center.lng + 0.01126887536623845 * 3,
-    minLng: center.lng - 0.01126887536623845 * 3,
-  }; //3km제한
-  return {
-    createdAt: "2022-12-30T13:00:44",
-    description: "desc",
-    iconPath: "https://www.spacechat.kr/icons/modalCreate.png",
-    latitude: maxLat < lat ? maxLat : minLat > lat ? minLat : lat, //37.49429998337241,
-    longitude: maxLng < lng ? maxLng : minLng > lng ? minLng : lng, //127.13290489999999,
-    postId: "14a3b374-4bc8-4eb7-9e4c-24db851561c8",
-    title: "012345678901234님의 쪽지",
-    userId: "2bfd6570-da54-fd08-f952-3b053cdd5121",
-  };
+import { defaultMarker, MarkerType } from "./MapContainer.module";
+export const markerListState = atom<MarkerType[]>({
+  key: "markerListState",
+  default: [
+    {
+      ...defaultMarker,
+      latitude: defaultCenter.lat,
+      longitude: defaultCenter.lng,
+    },
+  ],
 });
-
+export let mapInstance: google.maps.Map | null = null;
 /**
  * @library https://www.npmjs.com/package/@react-google-maps/api
  * @example_site https://codesandbox.io/s/relaxed-proskuriakova-mi31c?file=/src/App.js:194-210
  */
-type MarkerType = {
-  createdAt: string; //"2022-12-30T13:00:44";
-  description: string; //"";
-  iconPath: string; //"https://www.spacechat.kr/icons/modalCreate.png";
-  latitude: number; //37.49429998337241;
-  longitude: number; //127.13290489999999;
-  postId: string; //"14a3b374-4bc8-4eb7-9e4c-24db851561c8";
-  title: string; //"012345678901234님의 쪽지";
-  userId: string; //"2bfd6570-da54-fd08-f952-3b053cdd5121";
-};
-export let mapInstance: google.maps.Map | null = null;
 export default function MapContainer() {
   const router = useRouter();
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [markerList, setMarkerList] = useState<MarkerType[]>([]);
+  const markerList = useRecoilValue(markerListState);
   const isWrite = useRecoilValue(IsWriteState);
   const clusterRef = useRef<any>(null);
 
