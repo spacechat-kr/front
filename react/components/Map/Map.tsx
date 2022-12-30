@@ -101,6 +101,7 @@ const options: google.maps.MapOptions = {
   disableDoubleClickZoom: true,
   gestureHandling: "greedy",
   noClear: true,
+  backgroundColor: "#17263C",
 };
 
 export default function Map({
