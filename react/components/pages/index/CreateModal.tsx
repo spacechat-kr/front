@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { ax } from "../../../pages/_app";
+import { getDistance } from "../../Map/getDistance";
+import { CenterState } from "../../Map/Map";
 import { mapInstance } from "../../Map/MapContainer";
 import { IsHideHomeHeaderState, userDataState } from "./HomeHeader";
 import { IsWriteState } from "./MapNavigation";
@@ -11,6 +13,7 @@ let remainType = "none";
 export const CreateModal = () => {
   const router = useRouter();
   const userData = useRecoilValue(userDataState);
+  const center = useRecoilValue(CenterState);
   const [type, setType] = useState<"write" | "create" | "none">("none");
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
@@ -55,6 +58,9 @@ export const CreateModal = () => {
         if (titleRef.current.value.length > 20) return alert("쪽지 타이틀은 20자 제한입니다.");
         const { lat, lng } = { lat: mapInstance?.getCenter()?.lat(), lng: mapInstance?.getCenter()?.lng() };
         if (!lat || !lng) return alert("위/경도가 올바르지 않습니다. 새로고침 후 다시 시도해주세요.");
+        const distance = getDistance(center, { lat, lng });
+        if (distance >= 3) return alert("쪽지 놓기는 내 주변 3km로 제한되어 있습니다.");
+
         ax.post(`/post/create`, {
           userId: userData.uuid,
           title: titleRef.current.value,

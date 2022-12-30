@@ -5,7 +5,7 @@ import { IsHomeHeaderState } from "../pages/index/HomeHeader";
 import { throttle } from "lodash";
 import { IsWriteDisableState, IsWriteState } from "../pages/index/MapNavigation";
 import { useEffect } from "react";
-export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
+import { getDistance } from "./getDistance";
 
 const style = [
   { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -96,18 +96,7 @@ const options: google.maps.MapOptions = {
   styles: style,
 };
 
-// 두 좌표간 거리계산
-const getDistance = (pos1: { lat: number; lng: number }, pos2: { lat: number; lng: number }) => {
-  const toRadians = (deg) => deg * (Math.PI / 180);
-  const { lat: lat1, lng: lng1 } = pos1;
-  const { lat: lat2, lng: lng2 } = pos2;
-  const dlat = toRadians(lat2 - lat1);
-  const dlon = toRadians(lng1 - lng2);
-  const a =
-    Math.sin(dlat / 2) * Math.sin(dlat / 2) +
-    Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dlon / 2) * Math.sin(dlon / 2);
-  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-};
+export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 export default function Map({
   map,
@@ -122,7 +111,6 @@ export default function Map({
   const [isDisable, setIsDisable] = useRecoilState(IsWriteDisableState);
   const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
   const center = useRecoilValue(CenterState);
-  // const [center, setCenter] = useRecoilState(CenterState);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCwoQM-TnxyGry-EgM7dZ5Jh-ymTi1rdZU",
   });
@@ -139,6 +127,7 @@ export default function Map({
     if (distance >= 3 && !isDisable) setIsDisable(true);
     else if (distance < 3 && isDisable) setIsDisable(false);
   }, 25);
+
   const renderMap = () => {
     const loadHandler = (map: google.maps.Map) => setMap(map);
     return (
