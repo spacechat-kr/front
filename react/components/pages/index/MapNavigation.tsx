@@ -35,8 +35,8 @@ export const MapNavigation = () => {
       >
         <ButtonBase
           onClick={() => {
-            // mapInstance?.moveCamera({ center: { lat: center.lat, lng: center.lng } });
-            smoothlyAnimatePanTo(mapInstance, { lat: center.lat, lng: center.lng });
+            mapInstance?.panTo({ lat: center.lat, lng: center.lng });
+            // smoothlyAnimatePanTo(mapInstance, { lat: center.lat, lng: center.lng });
           }}
           style={{
             zIndex: 1000,
