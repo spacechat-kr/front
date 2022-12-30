@@ -42,7 +42,6 @@ export default function MapContainer() {
     /** 마커 모두 보이는곳으로 이동, 추후 3km 반경보는곳으로 이동하는것도 가능 */
     mapInstance = map;
     const mapFitBounds = () => {
-      // console.log("mapFitBounds:map> ", map);
       if (!map) return;
       const bounds = new google.maps.LatLngBounds();
       markerList.map((loc) => {

@@ -97,7 +97,7 @@ const options: google.maps.MapOptions = {
   scaleControl: true,
   mapTypeId: "roadmap",
   minZoom: 15,
-  maxZoom: 30,
+  maxZoom: 25,
   styles: style,
   center: defaultCenter,
   disableDoubleClickZoom: true,
@@ -128,6 +128,7 @@ export default function Map({
   useEffect(() => {
     onMove();
   }, [isWrite]);
+
   const CheckDistacneLimit = throttle(() => {
     const lat = map?.getCenter()?.lat();
     const lng = map?.getCenter()?.lng();

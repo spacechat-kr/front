@@ -108,7 +108,6 @@ export const CreateModal = () => {
                 inputRef={titleRef}
                 onFocus={(ref) => ref.target.setAttribute("maxLength", "20")}
                 defaultValue={userData.name ? `${userData.name.slice(0, 15)}님의 쪽지` : ""}
-                onLoadedData={(r) => console.log(r)}
                 onChange={(r) => {
                   const len = document.getElementById("titleLength");
                   if (len) {
@@ -195,7 +194,6 @@ export const CreateModal = () => {
     },
   };
 
-  console.log(modalType, type);
   return (
     <>
       <div
