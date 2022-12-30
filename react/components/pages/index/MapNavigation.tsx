@@ -3,8 +3,10 @@
 
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CenterState } from "../../Map/Map";
+import { mapInstance } from "../../Map/MapContainer";
+import { smoothlyAnimatePanTo } from "../../Map/MapContainer.module";
 import { IsHideHomeHeaderState } from "./HomeHeader";
 
 // React-google map current location
@@ -12,7 +14,7 @@ export const IsWriteState = atom<boolean>({ key: "IsWriteState", default: false 
 export const IsWriteDisableState = atom<boolean>({ key: "IsWriteDisableState", default: false });
 export const MapNavigation = () => {
   const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
-  const setCenter = useSetRecoilState(CenterState);
+  const center = useRecoilValue(CenterState);
   const [isWrite, setIsWrite] = useRecoilState(IsWriteState);
   const [isDisable, setIsDisable] = useRecoilState(IsWriteDisableState);
   const router = useRouter();
@@ -32,11 +34,10 @@ export const MapNavigation = () => {
         }}
       >
         <ButtonBase
-          onClick={() =>
-            setCenter((prev) => {
-              return { lat: prev.lat + 0.0000001, lng: prev.lng + 0.0000001 };
-            })
-          }
+          onClick={() => {
+            // mapInstance?.moveCamera({ center: { lat: center.lat, lng: center.lng } });
+            smoothlyAnimatePanTo(mapInstance, { lat: center.lat, lng: center.lng });
+          }}
           style={{
             zIndex: 1000,
             position: "fixed",
