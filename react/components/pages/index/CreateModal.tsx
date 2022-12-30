@@ -63,12 +63,17 @@ export const CreateModal = () => {
           longitude: lng,
           iconPath: "https://www.spacechat.kr/icons/modalCreate.png",
         })
-          .then((d) => {
-            console.log(d);
-            // onWriteLeave();
-            // router.back();
+          .then(({ data }) => {
+            if (data.code === "200") {
+              onWriteLeave();
+              router.back();
+            } else throw Error;
           })
-          .catch((e) => console.error(e));
+          .catch((e) =>
+            alert(
+              "데이터 전송 중 오류가 발생했습니다. 재시도에도 계속해서 문제가 발생한다면 홈 > 설정 > 문의하기를 이용해주세요."
+            )
+          );
       },
       onClickCancel: router.back,
       content: (titleRef, descRef) => {
