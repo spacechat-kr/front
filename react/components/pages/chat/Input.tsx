@@ -118,6 +118,7 @@ export const InputBox = () => {
             value,
             type: "text",
             deviceId: userData.uuid,
+            name: userData.name,
             roomId: router.query.id,
           }),
         })

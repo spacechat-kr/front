@@ -73,6 +73,7 @@ export const SocketListner = () => {
             value: null,
             type: "enter",
             deviceId: userData.uuid,
+            name: userData.name,
             roomId: router.query.id,
           }),
         })
