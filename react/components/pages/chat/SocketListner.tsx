@@ -39,20 +39,11 @@ export const SocketListner = () => {
       };
       ws.onmessage = (evt) => {
         // const data = JSON.parse(evt.data);
-        console.log(evt);
-        const value = evt.data;
-        //  setChatList((prev) => {
-        //    return [
-        //      ...prev,
-        //      {
-        //        createdAt: dayjs().format("YYYY-MM-DDTHH:mm:ss"),
-        //        message: value,
-        //        type: "text",
-        //        deviceId: myTestDeviceId,
-        //      },
-        //    ];
-        //  });
-        // setItems((prevItems) => [...prevItems, data]);
+        const chat = JSON.parse(evt.data);
+
+        setChatList((prev) => {
+          return [...prev, chat];
+        });
       };
     }
 

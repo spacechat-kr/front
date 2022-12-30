@@ -115,7 +115,7 @@ export const InputBox = () => {
           roomId: router.query.id,
           message: JSON.stringify({
             createdAt: dayjs().toISOString(),
-            value,
+            message: value,
             type: "text",
             deviceId: userData.uuid,
             name: userData.name,
