@@ -5,8 +5,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { atom, useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
-import Map, { defaultCenter } from "./Map";
+import Map from "./Map";
 import { defaultMarker, MarkerType } from "./MapContainer.module";
+
+const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 export const markerListState = atom<MarkerType[]>({
   key: "markerListState",
   default: [

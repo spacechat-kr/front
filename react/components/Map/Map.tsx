@@ -9,7 +9,7 @@ import { getDistance } from "./getDistance";
 import { ax } from "../../pages/_app";
 import { markerListState } from "./MapContainer";
 import _ from "lodash";
-export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
+const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 
 const style = [

@@ -1,5 +1,3 @@
-import { defaultCenter } from "./Map";
-
 export const defaultMarker = {
   createdAt: "2022-12-30T13:00:44",
   description: "desc",
@@ -10,6 +8,7 @@ export const defaultMarker = {
   title: "012345678901234님의 쪽지",
   userId: "2bfd6570-da54-fd08-f952-3b053cdd5121",
 };
+const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 /**
  * 임시 테스트용 마커 리스트
  */
