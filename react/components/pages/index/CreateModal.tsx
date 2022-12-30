@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { ax } from "../../../pages/_app";
 import { getDistance } from "../../Map/getDistance";
 import { CenterState } from "../../Map/Map";
-import { mapInstance, markerListState } from "../../Map/MapContainer";
+import { mapInstance, markerListState, markerListStateSelector } from "../../Map/MapContainer";
 import { IsHideHomeHeaderState, userDataState } from "./HomeHeader";
 import { IsWriteState } from "./MapNavigation";
 
@@ -14,7 +14,8 @@ export const CreateModal = () => {
   const router = useRouter();
   const userData = useRecoilValue(userDataState);
   const center = useRecoilValue(CenterState);
-  const markerList = useRecoilValue(markerListState);
+  const [postId, setPostId] = useState("");
+  const marker = useRecoilValue(markerListStateSelector(postId));
   const [type, setType] = useState<"write" | "create" | "none">("none");
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
@@ -31,6 +32,7 @@ export const CreateModal = () => {
   };
 
   useEffect(() => {
+    //#region type Check
     const p = router.asPath;
     if (!p.includes("#") && ["write", "create", "none"].includes(type)) remainType = type;
     const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
@@ -40,10 +42,19 @@ export const CreateModal = () => {
 
     // 쪽지를 놓을 이름이 필요합니다.
     if (!userData.name && aftertype === "create") router.push("/option#name");
+    //#endregion
+    //#region #enter일 경우 postId 가져옴
+    if (aftertype === "enter") {
+      const postId = p.includes("postId=") ? p.slice(p.indexOf("=") + 1, p.length) : null;
+      if (postId) setPostId(postId);
+      else alert("잘못된 접근경로입니다.");
+    }
+
+    //#endregion
   }, [router]);
 
   const modalType = type != "none" ? type : remainType;
-  if (modalType === "write") return <></>;
+  if (modalType === "write" || (modalType === "enter" && (!postId || !marker))) return <></>;
 
   const ModalList = {
     create: {
@@ -157,11 +168,10 @@ export const CreateModal = () => {
       onClickCancel: router.back,
       content: () => (
         <>
-          채팅방뫄뫄
+          {marker?.title}
           <br />
-          제발들어와주세요... <br />
-          제발들어와주세요... <br />
-          제발들어와주세요...
+          {marker?.description}
+          <br />
         </>
       ),
     },

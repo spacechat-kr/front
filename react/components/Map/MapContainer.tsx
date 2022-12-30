@@ -19,7 +19,7 @@ export const markerListState = atom<MarkerType[]>({
     },
   ],
 });
-const markerListStateSelector = selectorFamily({
+export const markerListStateSelector = selectorFamily({
   key: "markerListStateSelector",
   get:
     (postId) =>
