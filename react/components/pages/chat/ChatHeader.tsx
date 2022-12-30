@@ -2,7 +2,7 @@ import { ArrowBackIosNewRounded, Block, Delete, NotificationsOff, Settings } fro
 import ReportIcon from "@mui/icons-material/Report";
 import { ButtonBase, Divider, ListItemText, Menu, MenuItem } from "@mui/material";
 import { useRouter } from "next/router";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 
 export const ChatHeader = () => {
   const router = useRouter();
@@ -13,6 +13,15 @@ export const ChatHeader = () => {
 
   const isModal =
     router.asPath.includes("#alram") || router.asPath.includes("#report") || router.asPath.includes("#out");
+
+  useEffect(() => {
+    window.onpopstate = () => {
+      router.push("/list/chat");
+    };
+    return () => {
+      window.onpopstate = null;
+    };
+  });
 
   return (
     <div style={{ height: 60, position: "fixed", width: "100vw", maxWidth: 900 }}>
