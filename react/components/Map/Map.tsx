@@ -100,6 +100,7 @@ const options: google.maps.MapOptions = {
   center: defaultCenter,
   disableDoubleClickZoom: true,
   gestureHandling: "greedy",
+  noClear: true,
 };
 
 export default function Map({
