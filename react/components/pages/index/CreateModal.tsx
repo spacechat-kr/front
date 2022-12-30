@@ -177,7 +177,7 @@ export const CreateModal = () => {
                 joinerId: string; //"2bfd6570-da54-fd08-f952-3b053cdd5121";
                 postId: string; //"c10e26cd-fe43-4f64-9a86-9a8953d35ad0";
               } = data.data;
-              if (res.chatRoomId) router.push(`/chat/${res.chatRoomId}`);
+              if (res.chatRoomId) router.replace(`/chat/${res.chatRoomId}`);
               else throw Error;
             } else throw Error;
           })
