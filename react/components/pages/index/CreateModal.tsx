@@ -2,19 +2,21 @@ import { Box, ButtonBase, FormControl, FormHelperText, Input, TextareaAutosize }
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { ax } from "../../../pages/_app";
+import { mapInstance } from "../../Map/MapContainer";
 import { IsHideHomeHeaderState, userDataState } from "./HomeHeader";
 import { IsWriteState } from "./MapNavigation";
 
 let remainType = "none";
 export const CreateModal = () => {
   const router = useRouter();
+  const userData = useRecoilValue(userDataState);
   const [type, setType] = useState<"write" | "create" | "none">("none");
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
-  const userData = useRecoilValue(userDataState);
-
   const setIsHide = useSetRecoilState(IsHideHomeHeaderState);
   const setIsWrite = useSetRecoilState(IsWriteState);
+
   const onWrite = () => {
     setIsHide(true);
     setIsWrite(true);
@@ -43,6 +45,32 @@ export const CreateModal = () => {
       imgSrc: "/icons/modalCreate.png",
       confirmText: "여기에 쪽지 놓기",
       cancelText: "다른 곳에 쪽지 놓기",
+      onClickConfirm: () => {
+        setTimeout(() => {
+          if (titleRef.current) titleRef.current.value = titleRef.current.defaultValue;
+          if (descRef.current) descRef.current.value = descRef.current.defaultValue;
+        }, 1000);
+
+        if (!titleRef.current || !descRef.current) return alert("새로고침 후 다시 시도해주세요.");
+        if (titleRef.current.value.length > 20) return alert("쪽지 타이틀은 20자 제한입니다.");
+        const { lat, lng } = { lat: mapInstance?.getCenter()?.lat(), lng: mapInstance?.getCenter()?.lng() };
+        if (!lat || !lng) return alert("위/경도가 올바르지 않습니다. 새로고침 후 다시 시도해주세요.");
+        ax.post(`/post/create`, {
+          userId: userData.uuid,
+          title: titleRef.current.value,
+          description: descRef.current.value ? descRef.current.value : "",
+          latitude: lat,
+          longitude: lng,
+          iconPath: "https://www.spacechat.kr/icons/modalCreate.png",
+        })
+          .then((d) => {
+            console.log(d);
+            // onWriteLeave();
+            // router.back();
+          })
+          .catch((e) => console.error(e));
+      },
+      onClickCancel: router.back,
       content: (titleRef, descRef) => {
         return (
           <Box
@@ -67,7 +95,7 @@ export const CreateModal = () => {
               <Input
                 inputRef={titleRef}
                 onFocus={(ref) => ref.target.setAttribute("maxLength", "20")}
-                defaultValue={userData.name ? `${userData.name}님의 채팅방` : ""}
+                defaultValue={userData.name ? `${userData.name.slice(0, 15)}님의 쪽지` : ""}
                 onLoadedData={(r) => console.log(r)}
                 onChange={(r) => {
                   const len = document.getElementById("titleLength");
@@ -83,7 +111,7 @@ export const CreateModal = () => {
               />
               <FormHelperText component={"div"} style={{ display: "flex", justifyContent: "space-between" }}>
                 <div> </div>
-                <div id="titleLength">{userData.name ? `${userData.name.slice(0, 14)}님의 쪽지`.length : 0}/20</div>
+                <div id="titleLength">{userData.name ? `${userData.name.slice(0, 15)}님의 쪽지`.length : 0}/20</div>
               </FormHelperText>
             </FormControl>
             <FormControl variant="standard" sx={{ m: "0 0" }}>
@@ -114,6 +142,8 @@ export const CreateModal = () => {
       imgSrc: "/icons/modalCreate.png",
       confirmText: "참여하기",
       cancelText: "취소",
+      onClickConfirm: () => {},
+      onClickCancel: router.back,
       content: () => (
         <>
           채팅방뫄뫄
@@ -127,6 +157,8 @@ export const CreateModal = () => {
     out: {
       imgSrc: "/icons/modalAlert.svg",
       confirmText: "확인",
+      onClickConfirm: () => {},
+      onClickCancel: router.back,
       content: () => (
         <>
           내 위치 3km 이내에만
@@ -137,10 +169,14 @@ export const CreateModal = () => {
     },
     write: {
       cancelText: "",
+      onClickConfirm: () => {},
+      onClickCancel: router.back,
       content: () => <div></div>,
     },
     none: {
       cancelText: "",
+      onClickConfirm: () => {},
+      onClickCancel: () => {},
       content: () => null,
     },
   };
@@ -219,20 +255,10 @@ export const CreateModal = () => {
           />
         </div>
         {ModalList[modalType].content(titleRef, descRef)}
-        <ButtonBase
-          id="confirm"
-          onClick={() => {
-            setTimeout(() => {
-              if (titleRef.current) titleRef.current.value = titleRef.current.defaultValue;
-              if (descRef.current) descRef.current.value = descRef.current.defaultValue;
-            }, 1000);
-            onWriteLeave();
-            router.back();
-          }}
-        >
+        <ButtonBase id="confirm" onClick={ModalList[modalType].onClickConfirm}>
           {ModalList[modalType].confirmText}
         </ButtonBase>
-        <ButtonBase id="cancel" onClick={() => router.back()}>
+        <ButtonBase id="cancel" onClick={ModalList[modalType].onClickCancel}>
           {ModalList[modalType].cancelText}
         </ButtonBase>
       </Box>

@@ -31,6 +31,7 @@ const locationList = Array.from({ length: 5000 }).map((i) => {
  * @library https://www.npmjs.com/package/@react-google-maps/api
  * @example_site https://codesandbox.io/s/relaxed-proskuriakova-mi31c?file=/src/App.js:194-210
  */
+export let mapInstance: google.maps.Map | null = null;
 export default function MapContainer() {
   const router = useRouter();
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -47,6 +48,7 @@ export default function MapContainer() {
 
   useEffect(() => {
     /** 마커 모두 보이는곳으로 이동, 추후 3km 반경보는곳으로 이동하는것도 가능 */
+    mapInstance = map;
     const mapFitBounds = () => {
       // console.log("mapFitBounds:map> ", map);
       if (!map) return;

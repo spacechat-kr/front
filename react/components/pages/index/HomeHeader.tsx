@@ -1,12 +1,11 @@
-import { ButtonBase } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
-import { atom, useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
-import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
 import { Settings } from "@mui/icons-material";
+import SmsRoundedIcon from "@mui/icons-material/SmsRounded";
+import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import { localStorageEffect } from "../../../constant/hook/localStorageEffect";
+import { useEffect, useRef, useState } from "react";
 import uuid from "react-uuid";
-import { ax } from "../../../pages/_app";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { localStorageEffect } from "../../../constant/hook/localStorageEffect";
 
 const HomeHeightState = atom<number>({ key: "HomeHeightState", default: 1000 });
 export const IsHomeHeaderState = atom<boolean>({ key: "IsHomeHeaderState", default: false });
@@ -32,7 +31,10 @@ export const HomeHeader = () => {
     handleResize();
     if (userData.name) setName(userData.name);
     else setName(null);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      handleResize();
+      window.removeEventListener("resize", handleResize);
+    };
   }, [router]);
   // useEffect(() => {
   //   if (isOpen) setIsOpen(false);

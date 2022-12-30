@@ -3,8 +3,8 @@
 
 import { ButtonBase } from "@mui/material";
 import { useRouter } from "next/router";
-import { atom, useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
-import { CenterState, defaultCenter } from "../../Map/Map";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
+import { CenterState } from "../../Map/Map";
 import { IsHideHomeHeaderState } from "./HomeHeader";
 
 // React-google map current location
