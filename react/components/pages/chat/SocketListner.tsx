@@ -64,7 +64,7 @@ export const SocketListner = () => {
 
   // 소켓이 연결되었을 시에 send 메소드
   useEffect(() => {
-    if (socketConnected && ws) {
+    if (socketConnected && ws && ws.CONNECTING) {
       ws.send(
         JSON.stringify({
           roomId: router.query.id,
