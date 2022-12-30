@@ -14,14 +14,14 @@ export const ChatHeader = () => {
   const isModal =
     router.asPath.includes("#alram") || router.asPath.includes("#report") || router.asPath.includes("#out");
 
-  useEffect(() => {
-    window.onpopstate = () => {
-      router.push("/list/chat");
-    };
-    return () => {
-      window.onpopstate = null;
-    };
-  });
+  // useEffect(() => {
+  //   window.onpopstate = () => {
+  //     router.push("/list/chat");
+  //   };
+  //   return () => {
+  //     window.onpopstate = null;
+  //   };
+  // });
 
   return (
     <div style={{ height: 60, position: "fixed", width: "100vw", maxWidth: 900 }}>
