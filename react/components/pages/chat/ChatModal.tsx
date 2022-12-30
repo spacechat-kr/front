@@ -14,7 +14,7 @@ export const ChatModal = () => {
     const p = router.asPath;
     if (!p.includes("#") && ["alram", "out", "report", "none"].includes(type)) remainType = type;
     const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
-    setType(aftertype !== "/" ? aftertype : "none");
+    setType(["alram", "out", "report", "none"].includes(aftertype) ? aftertype : "none");
   }, [router]);
 
   const ModalList = {
@@ -64,7 +64,9 @@ export const ChatModal = () => {
       ),
     },
     none: {
+      imgSrc: "",
       cancelText: "",
+      onClickConfirm: () => {},
       content: () => <div></div>,
     },
   };

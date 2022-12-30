@@ -34,9 +34,9 @@ export const CreateModal = () => {
   useEffect(() => {
     //#region type Check
     const p = router.asPath;
-    if (!p.includes("#") && ["write", "create", "none"].includes(type)) remainType = type;
+    if (!p.includes("#") && ["write", "create", "none", "enter"].includes(type)) remainType = type;
     const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
-    setType(aftertype !== "/" ? aftertype : "none");
+    setType(["write", "create", "none", "enter"].includes(aftertype) ? aftertype : "none");
     if (["write", "create"].includes(aftertype)) onWrite();
     // else onWriteLeave();
 
@@ -164,7 +164,29 @@ export const CreateModal = () => {
       imgSrc: "/icons/modalCreate.png",
       confirmText: "참여하기",
       cancelText: "취소",
-      onClickConfirm: () => {},
+      onClickConfirm: () => {
+        ax.post(`/chatRoom/create`, {
+          joinerId: userData.uuid,
+          postId: postId,
+        })
+          .then(({ data }) => {
+            if (data.code === "200") {
+              const res: {
+                chatRoomId: string; //"5a2970d4-7ab4-4ae5-b411-ca8ba65ff010";
+                createdAt: string; //"2022-12-30T22:13:43";
+                joinerId: string; //"2bfd6570-da54-fd08-f952-3b053cdd5121";
+                postId: string; //"c10e26cd-fe43-4f64-9a86-9a8953d35ad0";
+              } = data.data;
+              if (res.chatRoomId) router.push(`/chat/${res.chatRoomId}`);
+              else throw Error;
+            } else throw Error;
+          })
+          .catch((e) =>
+            alert(
+              "네트워크 오류가 발생했습니다. 재시도에도 계속해서 문제가 발생한다면 홈 > 설정 > 문의하기를 이용해주세요."
+            )
+          );
+      },
       onClickCancel: router.back,
       content: () => (
         <>

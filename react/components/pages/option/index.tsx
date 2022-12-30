@@ -24,7 +24,7 @@ export const ExportModal = () => {
     const p = router.asPath;
     if (!p.includes("#") && ["export", "name", "none"].includes(type)) remainType = type;
     const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
-    setType(aftertype !== "/" ? aftertype : "none");
+    setType(["export", "name", "none"].includes(aftertype) ? aftertype : "none");
   }, [router]);
 
   const onClickExport = useCallback(() => {

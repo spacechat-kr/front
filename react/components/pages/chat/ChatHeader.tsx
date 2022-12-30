@@ -1,8 +1,8 @@
-import { ArrowBackIosNewRounded, Block, ContentPaste, Delete, NotificationsOff, Settings } from "@mui/icons-material";
-import { ButtonBase, Divider, ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
-import { useRouter } from "next/router";
-import { useState, MouseEvent } from "react";
+import { ArrowBackIosNewRounded, Block, Delete, NotificationsOff, Settings } from "@mui/icons-material";
 import ReportIcon from "@mui/icons-material/Report";
+import { ButtonBase, Divider, ListItemText, Menu, MenuItem } from "@mui/material";
+import { useRouter } from "next/router";
+import { MouseEvent, useState } from "react";
 
 export const ChatHeader = () => {
   const router = useRouter();
@@ -28,7 +28,10 @@ export const ChatHeader = () => {
         }}
       >
         <ButtonBase sx={{ ml: 1.5, borderRadius: 4, padding: 1 }}>
-          <ArrowBackIosNewRounded style={{ fontSize: 28, color: "#ffffff" }} onClick={router.back} />
+          <ArrowBackIosNewRounded
+            style={{ fontSize: 28, color: "#ffffff" }}
+            onClick={() => router.push("/list/chat")}
+          />
         </ButtonBase>
         <h3
           style={{
