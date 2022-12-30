@@ -112,6 +112,7 @@ export const InputBox = () => {
         chatListDiv.scrollTop = chatListDiv.scrollHeight;
       }, 10);
     }
+    TextareaRef.current?.focus();
   };
   return (
     <div style={{ background: "#1d202d", display: "flex", alignItems: "end" }}>
