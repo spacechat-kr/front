@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CenterState } from "../../Map/Map";
 import { mapInstance } from "../../Map/MapContainer";
-import { smoothlyAnimatePanTo } from "../../Map/MapContainer.module";
 import { IsHideHomeHeaderState } from "./HomeHeader";
 
 // React-google map current location
@@ -34,10 +33,7 @@ export const MapNavigation = () => {
         }}
       >
         <ButtonBase
-          onClick={() => {
-            mapInstance?.panTo({ lat: center.lat, lng: center.lng });
-            // smoothlyAnimatePanTo(mapInstance, { lat: center.lat, lng: center.lng });
-          }}
+          onClick={() => mapInstance?.panTo({ lat: center.lat, lng: center.lng })}
           style={{
             zIndex: 1000,
             position: "fixed",

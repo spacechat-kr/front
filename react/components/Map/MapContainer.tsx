@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { atom, selector, selectorFamily, useRecoilValue } from "recoil";
+import { atom, selectorFamily, useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
 import Map from "./Map";
