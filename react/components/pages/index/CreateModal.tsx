@@ -30,9 +30,10 @@ export const CreateModal = () => {
   };
 
   useEffect(() => {
-    if (!router.asPath.includes("#") && ["write", "create", "none"].includes(type)) remainType = type;
-    const aftertype = router.asPath.split("#")[1] as any;
-    setType(aftertype ? aftertype : "none");
+    const p = router.asPath;
+    if (!p.includes("#") && ["write", "create", "none"].includes(type)) remainType = type;
+    const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
+    setType(aftertype !== "/" ? aftertype : "none");
     if (["write", "create"].includes(aftertype)) onWrite();
     // else onWriteLeave();
 
@@ -178,12 +179,14 @@ export const CreateModal = () => {
       ),
     },
     write: {
+      imgSrc: "",
       cancelText: "",
       onClickConfirm: () => {},
       onClickCancel: router.back,
       content: () => <div></div>,
     },
     none: {
+      imgSrc: "",
       cancelText: "",
       onClickConfirm: () => {},
       onClickCancel: () => {},
@@ -191,6 +194,7 @@ export const CreateModal = () => {
     },
   };
 
+  console.log(modalType, type);
   return (
     <>
       <div

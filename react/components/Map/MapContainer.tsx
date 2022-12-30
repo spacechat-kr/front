@@ -92,9 +92,12 @@ export default function MapContainer() {
       fillOpacity: 0.35,
     },
   };
-  const onClickMarker = useCallback(() => {
-    if (!isWrite) router.push("#enter");
-  }, [isWrite]);
+  const onClickMarker = useCallback(
+    (postId: string) => {
+      if (!isWrite) router.push(`#enter?postId=${postId}`);
+    },
+    [isWrite]
+  );
   return (
     <Box
       sx={{
@@ -132,16 +135,16 @@ export default function MapContainer() {
       <Map setMap={setMap} map={map}>
         <MarkerClusterer>
           {(clusterer) =>
-            markerList.map((loc, id) => {
+            markerList.map((marker, id) => {
               clusterRef.current = clusterer;
               clusterer.setStyles(clusterStyle);
 
               return (
                 <CustomMarker
                   key={id}
-                  position={{ lng: loc.longitude, lat: loc.latitude }}
+                  position={{ lng: marker.longitude, lat: marker.latitude }}
                   clusterer={clusterer}
-                  onClick={onClickMarker}
+                  onClick={() => onClickMarker(marker.postId)}
                   disable={isWrite}
                 />
               );

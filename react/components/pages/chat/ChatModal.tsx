@@ -11,9 +11,10 @@ export const ChatModal = () => {
   const userData = useRecoilValue(userDataState);
 
   useEffect(() => {
-    if (!router.asPath.includes("#") && ["alram", "out", "report", "none"].includes(type)) remainType = type;
-    const aftertype = router.asPath.split("#")[1] as any;
-    setType(aftertype ? aftertype : "none");
+    const p = router.asPath;
+    if (!p.includes("#") && ["alram", "out", "report", "none"].includes(type)) remainType = type;
+    const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
+    setType(aftertype !== "/" ? aftertype : "none");
   }, [router]);
 
   const ModalList = {

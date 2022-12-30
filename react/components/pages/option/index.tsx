@@ -6,7 +6,6 @@ import { useRecoilState } from "recoil";
 import { metadata } from "../../../constant/testData";
 import { ExampleChatList } from "../../../pages/list/chat";
 import { ax } from "../../../pages/_app";
-import { encrypt } from "../../ignore/Crypto";
 import { InputTitleStyle } from "../index/CreateModal";
 import { userDataState } from "../index/HomeHeader";
 import { ChatCard } from "../list/chat.module";
@@ -22,9 +21,10 @@ export const ExportModal = () => {
   const checkRef = useRef<HTMLInputElement[]>([]);
   const nameRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (!router.asPath.includes("#") && ["export", "name", "none"].includes(type)) remainType = type;
-    const aftertype = router.asPath.split("#")[1] as any;
-    setType(aftertype ? aftertype : "none");
+    const p = router.asPath;
+    if (!p.includes("#") && ["export", "name", "none"].includes(type)) remainType = type;
+    const aftertype = p.slice(p.indexOf("#") + 1, p.indexOf("?") === -1 ? p.length : p.indexOf("?")) as any;
+    setType(aftertype !== "/" ? aftertype : "none");
   }, [router]);
 
   const onClickExport = useCallback(() => {
