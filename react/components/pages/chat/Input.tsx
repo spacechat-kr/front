@@ -3,8 +3,9 @@ import { Box, ButtonBase, TextareaAutosize } from "@mui/material";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { useState, useRef } from "react";
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
-import { ChatListState, myTestDeviceId } from "./ChatList";
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { userDataState } from "../index/HomeHeader";
+import { ChatListState } from "./ChatList";
 import { ws } from "./SocketListner";
 
 const FileInputState = atom<boolean>({ key: "FileInputState", default: false });
@@ -93,6 +94,7 @@ const FileInputIcon = () => {
 export const InputBox = () => {
   const router = useRouter();
   const [value, setValue] = useState("");
+  const userData = useRecoilValue(userDataState);
   const setChatList = useSetRecoilState(ChatListState);
   const TextareaRef = useRef<HTMLTextAreaElement>(null);
   const onClickSend = () => {
@@ -100,10 +102,10 @@ export const InputBox = () => {
       return [
         ...prev,
         {
-          createdAt: dayjs().format("YYYY-MM-DDTHH:mm:ss"),
+          createdAt: dayjs().toISOString(),
           message: value,
           type: "text",
-          deviceId: myTestDeviceId,
+          deviceId: userData.uuid,
         },
       ];
     });
@@ -111,7 +113,13 @@ export const InputBox = () => {
       ws.send(
         JSON.stringify({
           roomId: router.query.id,
-          message: value,
+          message: JSON.stringify({
+            createdAt: dayjs().toISOString(),
+            value,
+            type: "text",
+            deviceId: userData.uuid,
+            roomId: router.query.id,
+          }),
         })
       );
     setValue("");

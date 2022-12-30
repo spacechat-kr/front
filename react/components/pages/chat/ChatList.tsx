@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect } from "react";
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { userDataState } from "../index/HomeHeader";
 import { ChatListTest } from "./ChatList.module";
 
 export type ChatType = {
@@ -14,8 +15,8 @@ export const ChatListState = atom<ChatType[]>({
   key: "ChatListState",
   default: [],
 });
-export const myTestDeviceId = "123";
 export const ChatList = () => {
+  const userData = useRecoilValue(userDataState);
   const [chatList, setChatList] = useRecoilState(ChatListState);
 
   useEffect(() => {
@@ -115,7 +116,7 @@ export const ChatList = () => {
           return (
             <div
               key={i}
-              className={item.deviceId === myTestDeviceId ? "my" : "you"}
+              className={item.deviceId === userData.uuid ? "my" : "you"}
               style={{ marginBottom: isNextSamePerson ? 12 : 20 }}
             >
               {isTime && <div className="time">{dayjs(item.createdAt).format("hh:mm A")}</div>}
