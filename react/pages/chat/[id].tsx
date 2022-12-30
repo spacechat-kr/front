@@ -73,7 +73,7 @@ const SocketListner = () => {
   //   if (socketConnected) {
   //     ws.send(
   //       JSON.stringify({
-  //         roomId: "1",
+  //         roomId: "12",
   //         message: "1",
   //       })
   //     );
