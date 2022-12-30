@@ -17,7 +17,7 @@ export default function Page() {
           <InputBox />
           <ChatModal />
         </div>
-        {/* <SocketListner /> */}
+        <SocketListner />
       </Container>
     </>
   );
