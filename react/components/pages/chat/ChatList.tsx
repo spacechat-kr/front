@@ -1,9 +1,7 @@
 import { Box } from "@mui/material";
 import dayjs from "dayjs";
-import { useEffect } from "react";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { userDataState } from "../index/HomeHeader";
-import { ChatListTest } from "./ChatList.module";
 
 export type ChatType = {
   createdAt: string;
@@ -19,15 +17,14 @@ export const ChatList = () => {
   const userData = useRecoilValue(userDataState);
   const [chatList, setChatList] = useRecoilState(ChatListState);
 
-  useEffect(() => {
-    setChatList(ChatListTest);
-  }, []);
+  // useEffect(() => {
+  //   setChatList(ChatListTest);
+  // }, []);
   return (
     <div style={{ overflowY: "scroll", flex: 1, marginTop: "60px" }} id="chatList">
       <Box
         sx={{
-          minHeight: "calc(100vh - 52px)",
-
+          minHeight: "calc(100vh - 112px)",
           ".notice": {
             pr: "20px",
             pl: "20px",
