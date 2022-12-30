@@ -1,11 +1,14 @@
 import { Box } from "@mui/material";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
-import { IsHomeHeaderState } from "../pages/index/HomeHeader";
+import { IsHomeHeaderState, userDataState } from "../pages/index/HomeHeader";
 import { throttle } from "lodash";
 import { IsWriteDisableState, IsWriteState } from "../pages/index/MapNavigation";
 import { useEffect } from "react";
 import { getDistance } from "./getDistance";
+import { ax } from "../../pages/_app";
+export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
+export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 
 const style = [
   { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -94,10 +97,11 @@ const options: google.maps.MapOptions = {
   minZoom: 15,
   maxZoom: 18,
   styles: style,
+  center: defaultCenter,
+  disableDoubleClickZoom: true,
+  gestureHandling: "greedy",
 };
 
-export const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
-export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 export default function Map({
   map,
   setMap,
@@ -111,6 +115,7 @@ export default function Map({
   const [isDisable, setIsDisable] = useRecoilState(IsWriteDisableState);
   const [isOpen, setIsOpen] = useRecoilState(IsHomeHeaderState);
   const center = useRecoilValue(CenterState);
+  const userData = useRecoilValue(userDataState);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCwoQM-TnxyGry-EgM7dZ5Jh-ymTi1rdZU",
   });
@@ -118,7 +123,7 @@ export default function Map({
   useEffect(() => {
     onMove();
   }, [isWrite]);
-  const onMove = throttle(() => {
+  const CheckDistacneLimit = throttle(() => {
     const lat = map?.getCenter()?.lat();
     const lng = map?.getCenter()?.lng();
     if (!lat || !lng || !isWrite) return;
@@ -127,6 +132,29 @@ export default function Map({
     if (distance >= 3 && !isDisable) setIsDisable(true);
     else if (distance < 3 && isDisable) setIsDisable(false);
   }, 25);
+  const getMarkerListByCenter = throttle(() => {
+    const lat = map?.getCenter()?.lat();
+    const lng = map?.getCenter()?.lng();
+    if (!lat || !lng) return;
+
+    const { maxLat, minLat, maxLng, minLng } = {
+      maxLat: lat + 0.009094341036469854 * 3,
+      minLat: lat - 0.009094341036469854 * 3,
+      maxLng: lng + 0.01126887536623845 * 3,
+      minLng: lng - 0.01126887536623845 * 3,
+    }; //3km제한
+    ax.post(`/post/getPostByLocation`, {
+      endLatitude: maxLat,
+      endLongitude: maxLng,
+      startLatitude: minLat,
+      startLongitude: minLng,
+      userId: userData.uuid,
+    });
+  }, 1000);
+  const onMove = () => {
+    CheckDistacneLimit();
+    getMarkerListByCenter();
+  };
 
   const renderMap = () => {
     const loadHandler = (map: google.maps.Map) => setMap(map);
@@ -142,9 +170,6 @@ export default function Map({
             width: "100vw",
             maxWidth: 900,
             justifyContent: "center",
-            // position: "fixed",
-            // bottom: 16,
-            // height: 16,
           },
         }}
       >

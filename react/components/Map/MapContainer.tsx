@@ -22,8 +22,14 @@ const locationList = Array.from({ length: 5000 }).map((i) => {
     minLng: center.lng - 0.01126887536623845 * 3,
   }; //3km제한
   return {
-    lat: maxLat < lat ? maxLat : minLat > lat ? minLat : lat,
-    lng: maxLng < lng ? maxLng : minLng > lng ? minLng : lng,
+    createdAt: "2022-12-30T13:00:44",
+    description: "desc",
+    iconPath: "https://www.spacechat.kr/icons/modalCreate.png",
+    latitude: maxLat < lat ? maxLat : minLat > lat ? minLat : lat, //37.49429998337241,
+    longitude: maxLng < lng ? maxLng : minLng > lng ? minLng : lng, //127.13290489999999,
+    postId: "14a3b374-4bc8-4eb7-9e4c-24db851561c8",
+    title: "012345678901234님의 쪽지",
+    userId: "2bfd6570-da54-fd08-f952-3b053cdd5121",
   };
 });
 
@@ -31,11 +37,21 @@ const locationList = Array.from({ length: 5000 }).map((i) => {
  * @library https://www.npmjs.com/package/@react-google-maps/api
  * @example_site https://codesandbox.io/s/relaxed-proskuriakova-mi31c?file=/src/App.js:194-210
  */
+type MarkerType = {
+  createdAt: string; //"2022-12-30T13:00:44";
+  description: string; //"";
+  iconPath: string; //"https://www.spacechat.kr/icons/modalCreate.png";
+  latitude: number; //37.49429998337241;
+  longitude: number; //127.13290489999999;
+  postId: string; //"14a3b374-4bc8-4eb7-9e4c-24db851561c8";
+  title: string; //"012345678901234님의 쪽지";
+  userId: string; //"2bfd6570-da54-fd08-f952-3b053cdd5121";
+};
 export let mapInstance: google.maps.Map | null = null;
 export default function MapContainer() {
   const router = useRouter();
   const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [markerList, setMarkerList] = useState<{ lat: number; lng: number }[]>(locationList);
+  const [markerList, setMarkerList] = useState<MarkerType[]>([]);
   const isWrite = useRecoilValue(IsWriteState);
   const clusterRef = useRef<any>(null);
 
@@ -54,7 +70,7 @@ export default function MapContainer() {
       if (!map) return;
       const bounds = new google.maps.LatLngBounds();
       markerList.map((loc) => {
-        bounds.extend(new google.maps.LatLng(loc.lat, loc.lng));
+        bounds.extend(new google.maps.LatLng(loc.latitude, loc.longitude));
       });
       map.fitBounds(bounds);
     };
@@ -147,7 +163,13 @@ export default function MapContainer() {
               clusterer.setStyles(clusterStyle);
 
               return (
-                <CustomMarker key={id} position={loc} clusterer={clusterer} onClick={onClickMarker} disable={isWrite} />
+                <CustomMarker
+                  key={id}
+                  position={{ lng: loc.longitude, lat: loc.latitude }}
+                  clusterer={clusterer}
+                  onClick={onClickMarker}
+                  disable={isWrite}
+                />
               );
             })
           }
