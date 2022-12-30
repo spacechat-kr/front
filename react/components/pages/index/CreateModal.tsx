@@ -49,11 +49,6 @@ export const CreateModal = () => {
       confirmText: "여기에 쪽지 놓기",
       cancelText: "다른 곳에 쪽지 놓기",
       onClickConfirm: () => {
-        setTimeout(() => {
-          if (titleRef.current) titleRef.current.value = titleRef.current.defaultValue;
-          if (descRef.current) descRef.current.value = descRef.current.defaultValue;
-        }, 1000);
-
         if (!titleRef.current || !descRef.current) return alert("새로고침 후 다시 시도해주세요.");
         if (titleRef.current.value.length > 20) return alert("쪽지 타이틀은 20자 제한입니다.");
         const { lat, lng } = { lat: mapInstance?.getCenter()?.lat(), lng: mapInstance?.getCenter()?.lng() };
@@ -71,6 +66,10 @@ export const CreateModal = () => {
         })
           .then(({ data }) => {
             if (data.code === "200") {
+              setTimeout(() => {
+                if (titleRef.current) titleRef.current.value = titleRef.current.defaultValue;
+                if (descRef.current) descRef.current.value = descRef.current.defaultValue;
+              }, 1000);
               onWriteLeave();
               router.back();
             } else throw Error;
