@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import { Circle, MarkerClusterer } from "@react-google-maps/api";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { atom, useRecoilValue } from "recoil";
+import { atom, selector, selectorFamily, useRecoilValue } from "recoil";
 import { IsWriteState } from "../pages/index/MapNavigation";
 import CustomMarker from "./CustomMarker";
 import Map from "./Map";
@@ -19,6 +19,25 @@ export const markerListState = atom<MarkerType[]>({
     },
   ],
 });
+const markerListStateSelector = selectorFamily({
+  key: "markerListStateSelector",
+  get:
+    (postId) =>
+    ({ get }) => {
+      const list = get(markerListState).filter((i) => i.postId === postId);
+      return list.length > 0 ? list[0] : null;
+    },
+  set:
+    (postId) =>
+    ({ set }, newValue) =>
+      set(markerListState, (prev) => {
+        const newMarker = newValue as MarkerType;
+        const prevList = prev.filter((i) => i.postId !== postId);
+        if (newValue) return [...prevList, newMarker];
+        else return prevList;
+      }),
+});
+
 export let mapInstance: google.maps.Map | null = null;
 /**
  * @library https://www.npmjs.com/package/@react-google-maps/api
