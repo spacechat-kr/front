@@ -97,7 +97,7 @@ const options: google.maps.MapOptions = {
   scaleControl: true,
   mapTypeId: "roadmap",
   minZoom: 15,
-  maxZoom: 18,
+  maxZoom: 30,
   styles: style,
   center: defaultCenter,
   disableDoubleClickZoom: true,

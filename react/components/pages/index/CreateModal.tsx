@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { ax } from "../../../pages/_app";
 import { getDistance } from "../../Map/getDistance";
 import { CenterState } from "../../Map/Map";
-import { mapInstance } from "../../Map/MapContainer";
+import { mapInstance, markerListState } from "../../Map/MapContainer";
 import { IsHideHomeHeaderState, userDataState } from "./HomeHeader";
 import { IsWriteState } from "./MapNavigation";
 
@@ -14,6 +14,7 @@ export const CreateModal = () => {
   const router = useRouter();
   const userData = useRecoilValue(userDataState);
   const center = useRecoilValue(CenterState);
+  const markerList = useRecoilValue(markerListState);
   const [type, setType] = useState<"write" | "create" | "none">("none");
   const titleRef = useRef<HTMLInputElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
