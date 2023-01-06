@@ -1,11 +1,11 @@
 import { Box, ButtonBase, Checkbox, FormControl, FormHelperText, Input } from "@mui/material";
+import axios from "axios";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { metadata } from "../../../constant/testData";
 import { ExampleChatList } from "../../../pages/list/chat";
-import { ax } from "../../../pages/_app";
 import { InputTitleStyle } from "../index/CreateModal";
 import { userDataState } from "../index/HomeHeader";
 import { ChatCard } from "../list/chat.module";
@@ -244,8 +244,8 @@ export const ExportModal = () => {
                       return { ...prev, name };
                     });
                     if (!userData.name)
-                      ax.post(`/user/create`, { name, userId: userData.uuid }).then(() => router.back());
-                    else ax.post(`/user/update`, { name, userId: userData.uuid }).then(() => router.back());
+                      axios.post(`/user/create`, { name, userId: userData.uuid }).then(() => router.back());
+                    else axios.post(`/user/update`, { name, userId: userData.uuid }).then(() => router.back());
                   } else {
                     nameRef.current.value = userData.name ? userData.name : "";
                   }

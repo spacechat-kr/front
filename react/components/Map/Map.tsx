@@ -6,9 +6,9 @@ import { throttle } from "lodash";
 import { IsWriteDisableState, IsWriteState } from "../pages/index/MapNavigation";
 import { useEffect } from "react";
 import { getDistance } from "./getDistance";
-import { ax } from "../../pages/_app";
 import { markerListState } from "./MapContainer";
 import _ from "lodash";
+import axios from "axios";
 const defaultCenter = { lat: 37.494295, lng: 127.1329049 };
 export const CenterState = atom({ key: "CenterState", default: defaultCenter });
 
@@ -149,13 +149,14 @@ export default function Map({
       maxLng: lng + 0.01126887536623845 * 3,
       minLng: lng - 0.01126887536623845 * 3,
     }; //3km제한
-    ax.post(`/post/getPostByLocation`, {
-      endLatitude: maxLat,
-      endLongitude: maxLng,
-      startLatitude: minLat,
-      startLongitude: minLng,
-      userId: userData.uuid,
-    })
+    axios
+      .post(`/post/getPostByLocation`, {
+        endLatitude: maxLat,
+        endLongitude: maxLng,
+        startLatitude: minLat,
+        startLongitude: minLng,
+        userId: userData.uuid,
+      })
       .then(({ data }) => {
         if (data.code === "200") {
           if (!data.data || !data.data.length) return;

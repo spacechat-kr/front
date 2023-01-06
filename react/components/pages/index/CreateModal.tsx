@@ -1,8 +1,8 @@
 import { Box, ButtonBase, FormControl, FormHelperText, Input, TextareaAutosize } from "@mui/material";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { ax } from "../../../pages/_app";
 import { getDistance } from "../../Map/getDistance";
 import { CenterState } from "../../Map/Map";
 import { mapInstance, markerListState, markerListStateSelector } from "../../Map/MapContainer";
@@ -69,14 +69,15 @@ export const CreateModal = () => {
         const distance = getDistance(center, { lat, lng });
         if (distance >= 3) return alert("쪽지 놓기는 내 주변 3km로 제한되어 있습니다.");
 
-        ax.post(`/post/create`, {
-          userId: userData.uuid,
-          title: titleRef.current.value,
-          description: descRef.current.value ? descRef.current.value : "",
-          latitude: lat,
-          longitude: lng,
-          iconPath: "https://www.spacechat.kr/icons/modalCreate.png",
-        })
+        axios
+          .post(`/post/create`, {
+            userId: userData.uuid,
+            title: titleRef.current.value,
+            description: descRef.current.value ? descRef.current.value : "",
+            latitude: lat,
+            longitude: lng,
+            iconPath: "https://www.spacechat.kr/icons/modalCreate.png",
+          })
           .then(({ data }) => {
             if (data.code === "200") {
               setTimeout(() => {
@@ -165,10 +166,11 @@ export const CreateModal = () => {
       confirmText: "참여하기",
       cancelText: "취소",
       onClickConfirm: () => {
-        ax.post(`/chatRoom/create`, {
-          joinerId: userData.uuid,
-          postId: postId,
-        })
+        axios
+          .post(`/chatRoom/create`, {
+            joinerId: userData.uuid,
+            postId: postId,
+          })
           .then(({ data }) => {
             if (data.code === "200") {
               const res: {

@@ -4,13 +4,11 @@ import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import "/public/styles/globals.css";
 
-export const ax = axios.create({
-  baseURL: "http://3.113.100.47:8080/",
-  timeout: 10000,
-  // headers: { "X-Custom-Header": "foobar" },
-});
-
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const isLocalhost = location.hostname === "localhost";
+    axios.defaults.baseURL = isLocalhost ? "http://3.113.100.47:8080/" : "https://api.spacechat.kr/";
+  }, []);
   return (
     <RecoilRoot>
       <Component {...pageProps} />
